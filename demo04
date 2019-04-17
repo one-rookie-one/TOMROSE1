@@ -1,0 +1,14 @@
+package day01;
+
+public class demo10 {
+
+	public static void main(String[] args) {
+		char c='A';
+		System.out.println((int)'非');
+		System.out.println((int)'南');
+		System.out.println((int)'即');
+		System.out.println((int)'北');
+
+	}
+
+}
