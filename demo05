@@ -1,0 +1,12 @@
+package day01;
+import java.util.Random;
+public class demo11 {
+	public static void main(String[] args) {
+		Random random=new Random();
+		int n=random.nextInt(26);
+		System.out.println(n);
+		char ch =(char)('A'+n);
+		System.out.println(ch);
+	}
+
+}
