@@ -20,3 +20,73 @@ public class practice01 {
 
 	
 }
+
+package GO;
+
+public class practice02 {
+
+	public static void main(String[] args) {
+		int age=80;
+		System.out.println(age);
+		{
+			double rank=6.66;
+			System.out.println(rank);
+			
+		}
+		double rank=7.77;
+		System.out.println(rank);
+		
+	}
+
+}
+
+package GO;
+
+public class practice03 {
+
+	public static void main(String[] args) {
+		long now=System.currentTimeMillis();
+		System.out.println(now);
+		long year=now/1000/60/60/24/365+1970;
+		System.out.println("公元"+year);
+		
+		
+	}
+
+}
+
+package GO;
+
+import java.util.Scanner;
+
+public class practice04 {
+	
+	public static void main(String[] args) {
+	Scanner console=new Scanner(System.in);
+	System.out.println("请输入时间");
+	double t=console.nextDouble();
+	double g=9.8;
+	double s;
+	s=g*t*t/2;
+	System.out.println("下落了"+t+"秒 下降了"+s+"米");
+	
+	}
+
+}
+
+package GO;
+import java.util.Scanner;
+public class practice06 {
+
+	public static void main(String[] args) {
+		Scanner console=new Scanner(System.in);
+		System.out.println("请输入电阻");
+		double R= console.nextDouble();
+		double U=220;
+		double I;
+		I=U/R;
+		System.out.println("在220v电压下"+R+"欧姆 电阻可以产生"+I+"安 电流");
+		
+	}
+
+}
