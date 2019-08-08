@@ -90,3 +90,24 @@ public class practice06 {
 	}
 
 }
+package GO;
+
+import java.util.Scanner;
+
+public class practice07 {
+
+	public static void main(String[] args) {
+		Scanner console = new Scanner(System.in);
+		System.out.println("请输入力");
+		double F=console.nextDouble();
+		double m=1;
+		double a;
+		a=F/m;
+		System.out.println("在质量为1的情况下当力为"+F+"N的时候 物体获得的加速度为"+a+"m/s/s");
+			
+			
+		
+
+	}
+
+}
