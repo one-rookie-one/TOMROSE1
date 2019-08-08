@@ -1,0 +1,22 @@
+package GO;
+
+public class practice01 {
+
+	public practice01() {
+		
+	}
+
+	public static void main(String[] args) {
+	int x;
+	x=100;
+	//System.out.println(x);
+	{
+	double y=6.66;
+	System.out.println(x+y);
+	
+	}
+
+	}
+
+	
+}
