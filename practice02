@@ -1,0 +1,93 @@
+package GO;
+import java.util.Random;
+
+public class practice09 {
+
+	public static void main(String[] args) {
+		Random random =new Random();
+		int x=random.nextInt(100);
+		System.out.println(x);
+		char ch=(char)('A'+x);
+		ch=(char)('A'+random.nextInt(x));
+		System.out.println(ch);
+	
+	}
+
+}
+
+package GO;
+
+public class practice10 {
+
+	public static void main(String[] args) {
+		 boolean isMan=true;
+		 boolean used=false;
+		 if (isMan){
+			 System.out.println("纯爷们！");
+			 
+		 }
+		 used=true;
+		if(used) {
+			System.out.println("二手九折");
+		}
+		
+
+	}
+
+}
+
+开根号—Math.sqrt(n)
+Unicode是世界通用的定长字符集，所有的字符都是16位
+*字符类型 char 类型
+* 16位整数  范围 0~65535 没有负数
+*可以按照整数计算
+*数值是unicode编码值
+‘\u4e2d’;//16进制的unicode编码表示的字符 中
+System.out.println((int)c);//f(a+b)  int 强制类型转换
+System.out.println((int)‘B’)；//66;
+System.out.println((int)‘c’);//67
+System.out.println((int)‘0’)//48;
+System.out.println((int)‘1’)；//;49
+System.out.println((int)’中’);//20013
+\n   换行 
+Char ch =’/’’;//一个单引号字符
+System.out.println(ch);//单引号字符
+System.out.println((int)ch);//单引号的编码
+//\n换行 \r回车 \t tab字符 \”双引号 \\表示一个\
+Integer.toHexString(‘国‘)；//一个类 可以显示16进制的编码
+打印一个字符的16进制编码
+Ch=65536；//编译错误，不能超出范围赋值
+不是所有字符都可以显示，只能本地字符（中文20000+）
+//超过本地字符集的字不能显示
+Ch=’\t’不能显示
+Byte-short-int-long-float-double
+Char-int
+强制类型转换，从大到小需要强制转换符，会造成精度损失或者溢出。
+Long l=1；1 是int（32）自动转化位long类型（64）位赋值给
+// 变量 1
+//自动类型转换，小类型到大类型转化时候会发生。
+L=1045l*1024*1024*4;
+Int I =(int)l;//强制类型转换，超范围转换溢出了
+System.out.println(i);//溢出了，反例
+L=1000L;
+I=(int)l;//强制类型转换
+System.out.println(i);//1000
+Double pi=3.1415926535897932;
+Float f=(float)pi;//强制类型转换找出精度损失
+System.out.println(f);//精度变差
+在java中所有API（类库）的范围都是包含开始，不包括结束
+Import java.util.Random;
+Random random =new Random();
+Int n=random.nextInt(26);
+//生成0到26范围内的随机数，不包括26 
+字符是一个数，所以就是生成：65~（65+25）=65+【0，26）
+=65+n(n-26)
+
+*布尔类型
+*用于标识 ture真和false假状态
+*用来表示判断的结果
+Boolean isMan = ture;//真的是个男人
+isMan = false//不是一个男的
+//used: 用过，二手的
+Boolean used =ture;//真的是二手的
+Used = false//不是二手的，新货
