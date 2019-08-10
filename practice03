@@ -1,0 +1,108 @@
+package GO;
+
+public class practice11 {
+
+	public static void main(String[] args) {
+		int x=6;
+		long y=6L;
+		System.out.println(x+y);
+		int z=3;
+		double m=1D;
+		double dx=m/z;
+		System.out.println(dx);
+		long now=System.currentTimeMillis();
+		double year=now/1000D/60/60/24/365+1970;
+		System.out.println(year);
+		
+		
+		
+		
+
+		
+
+	}
+
+}
+
+package GO;
+
+public class practice12 {
+
+	public static void main(String[] args) {
+		int num=600;
+		System.out.println(num%700);
+		System.out.println(0%5);
+		System.out.println(1%5);
+		System.out.println(2%5);
+		System.out.println(3%5);
+		System.out.println(4%5);
+		System.out.println(5%5);
+		System.out.println(6%5);
+		System.out.println(7%5);
+		System.out.println(8%5);
+		System.out.println(9%5);
+	}
+
+}
+
+package GO;
+
+public class practice13 {
+	
+
+	public static void main(String[] args) {
+		int a=1;
+		int b=a++;
+		System.out.println(b);
+		System.out.println(a+","+b);		
+		a=1;
+		a=a++;
+		System.out.println(a);
+		
+}
+
+}
+数学运算
+类型相同的参与运算，返回类型相同是值
+小于32位数作为int计算
+注意：整数的除法结果是整数：整除现象
+编程语言：接近于人类语言的语法
+经过编译为计算机的指令+数据
+变量
+1 必须声明并且初始化后使用
+2 变量有明确类型
+3 变量有作用域
+基本类型 8种
+Byte
+Short
+Int
+Double
+Long  64位
+Float 32位
+
+Boolean
+Char 就是一个数！二进制的
+显示的时候：经过处理显示为字符
+Int n =65;//n = 0100001
+Float 的精度没有long高（有效位数=尾数短）
+Float 的范围大于long指数可以很大
+System.out.println(n)//int类型
+Syetem.out.println((char)n)//char类型
+System.out.println((int)“中”)//int类型 转换”20013’
+
+输出语句根据类型得到不同得结果
+运算符
+数学运算符 + - * / % ++ --
+1 注意数据类型得范围，避免溢出运算
+溢出是没有编译和运行异常的！
+2 整数的除法是整除
+3 %运算 取余数运算 获取除法结果的余数（1）负数的余数是负数（2）num/ 是周期函数
+
+4 自增运算，
+Int b=a++;//后++先用a然后+1
+//1.取a的值作为（a++）的结果1
+//2将a增加1，a为2
+//3.执行赋值运算，将（a++）的结果1赋值给b为1
+System.out.orintln(s+”,”+b);//2,1
+a=1;
+b=++a;//先++,先+1，然后用a
