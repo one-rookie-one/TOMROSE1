@@ -1,0 +1,163 @@
+package GO;
+
+public class practice14 {
+
+	public static void main(String[] args) {
+		int x=5;
+		int y=6;
+		y=y+--x*y+++y;
+		System.out.println(y);
+		
+
+	}
+
+}
+
+package GO;
+
+public class practice15 {
+
+	public static void main(String[] args) {
+		char ch='A';
+		boolean isNumber=ch>='0'&&ch<='9';
+		System.out.println(isNumber);
+		
+		ch='6';
+		boolean isnumber=ch>='0'&&ch<='9';
+		System.out.println(isnumber);
+
+	}
+
+}
+
+package GO;
+
+public class practice16 {
+
+	public static void main(String[] args) {
+		int age=68;
+		int sex='男';
+		if(sex=='女' && age++>70 ){
+			System.out.println("欢迎光临！");
+				
+		}
+		if(sex=='男' && age>65) {
+			System.out.println("欢迎光临啊！");
+			
+		}
+	}
+
+}
+
+package GO;
+
+import java.util.Scanner;
+
+public class practice17 {
+
+	public static void main(String[] args) {
+		Scanner console=new Scanner(System.in);
+		System.out.println("请输入用空格隔开的三个数：");
+		int a= console.nextInt();
+		int b= console.nextInt();
+		int c= console.nextInt();
+		int max = a>b? a:b;
+		max = max>c? max:c;
+		System.out.println("最大是："+max);
+		
+	}
+
+}
+
+package GO;
+
+import java.util.Scanner;
+
+public class practice18 {
+
+	public static void main(String[] args) {
+		Scanner console=new Scanner(System.in);
+		System.out.println("请输入行数：");
+		int rows = console.nextInt();
+		int size =10;
+		int pages= rows%size==0 ?rows%size : rows/size+1;
+		System.out.println("总共："+pages);
+
+	}
+
+}
+
+public class practice19 {
+
+	public static void main(String[] args) {
+		
+		int a;
+		int b;
+		int c;
+		c=b=a=3;
+		System.out.println(a+","+b+","+c);	
+		
+		b=2345;
+		int a1=b%10;
+		b/=10;
+		int a2=b%10;
+		b/=10;
+		int a3=b%10;
+		b/=10;
+		int a4=b%10;
+		b/=10;
+		System.out.println(a1+","+a2+","+a3+","+a4);
+		
+	}
+
+}
+
+
+public class practice20 {
+	
+	public static void main(String[] args) {
+		int year =2019;
+		boolean isLeapyear;
+		isLeapyear= (year%4==0) && (!(year%100==0))||(year%400==0);
+		if(isLeapyear) {
+			System.out.println(year+"是闰年");
+			
+		}
+		else {
+			System.out.println(year+"不是闰年");
+			
+		}
+				
+
+	}
+
+}
+
+package day001;
+
+import java.util.Scanner;
+
+public class demo01 {
+
+	public static void main(String[] args) {
+		Scanner console = new Scanner(System.in);
+		System.out.println("请输入年份");
+		
+		int year =console.nextInt();
+		
+		boolean isLeapyear;
+		
+		isLeapyear= (year%4==0) && (!(year%100==0))||(year%400==0);
+		if(isLeapyear) {
+			System.out.println(year+"是闰年");
+			
+		}
+		else {
+			System.out.println(year+"不是闰年");
+			
+		}
+				
+
+	}
+
+}
