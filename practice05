@@ -1,0 +1,129 @@
+package day001;
+
+import java.util.Scanner;
+
+public class demo05 {
+
+	public static void main(String[] args) {
+		Scanner console = new Scanner(System.in);
+		System.out.println("请输入分数");
+		int score = console.nextInt();
+		switch(score/10) {
+		case 10: System.out.println("优秀");break;
+		case 9: System.out.println("优秀");break;
+		case 8: System.out.println("良好");break;
+		case 7: System.out.println("一般");break;
+		case 6: System.out.println("及格");break;
+		default: System.out.println("不及格");
+		}
+		
+
+	}
+
+}
+
+package day001;
+//个人所得税
+import java.util.Scanner;
+
+public class demo04 {
+
+	public static void main(String[] args) {
+		Scanner console = new Scanner(System.in);
+		System.out.println("请输入工资：");
+		double tax;
+		double taxIncome;
+		double salary=console.nextDouble();
+		taxIncome = salary - 3500;
+		
+		if(taxIncome<36000) {
+			tax = taxIncome *(3.0/100);
+		}
+		else if(taxIncome>=36000&&taxIncome<=144000) {
+			tax = taxIncome *(10.0/100)-2520;
+		}
+		else if(taxIncome>144000&&taxIncome<=300000) {
+			tax = taxIncome *(20.0/100)-16920;
+		}
+		else if(taxIncome>300000&&taxIncome<=420000) {
+			tax = taxIncome *(25.0/100)-31920;
+		}
+		else if(taxIncome>420000&&taxIncome<=660000) {
+			tax = taxIncome *(30.0/100)-52920;
+		}
+		else if(taxIncome>660000&&taxIncome<=960000) {
+			tax = taxIncome *(35.0/100)-85920;
+		}
+		else if(taxIncome>960000) {
+			tax = taxIncome *(45.0/100)-181920;
+		}
+		else {
+			tax = 0;}
+		
+		System.out.println("税款"+tax);
+		
+		System.out.println("税后"+(salary-tax));
+
+	}
+
+}
+
+package day001;
+
+import java.util.Scanner;
+
+public class demo03 {
+
+	public static void main(String[] args) {
+		Scanner console = new Scanner(System.in);
+		System.out.println("请输入分数：");
+		int score = console.nextInt();
+		if(score>=90) {
+			System.out.println("优秀");
+		}
+		else if(score>=80) {
+			System.out.println("良好");
+		}
+		else if(score>=70) {
+			System.out.println("一般");
+		}
+		else if(score>=60) {
+			System.out.println("及格");
+		}
+		else{
+			System.out.println("不及格");
+		}
+		
+
+	}
+
+}
+
+package day001;
+
+public class demo2 {
+
+	public static void main(String[] args) {
+		int a = 10;
+		int b = 12;
+		int c = 2;
+		if (a<b) {
+			System.out.println("a最小"+a);
+			
+		}
+		else {
+			System.out.println("b最小"+b);
+			
+		}
+		if (b<c) {
+			System.out.println("b最小"+b);
+			
+		}
+		else {
+			System.out.println("c最小"+c);
+			
+		}
+			
+	}
+
+}
