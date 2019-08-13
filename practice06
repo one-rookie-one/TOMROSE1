@@ -1,0 +1,98 @@
+package day001;
+
+import java.util.Scanner;
+
+public class demo06 {
+
+	public static void main(String[] args) {
+		System.out.println("\t 1.显示全部菜单");
+		System.out.println("\t 2.打开用户数据");
+		System.out.println("\t 3.删除账户信息");
+		System.out.println("\t 4.初始化");
+		System.out.println("\t 0.返回上一层");
+		Scanner console = new Scanner(System.in);
+		int command = console.nextInt();
+		switch(command) {
+		case 0:System.out.println("离开全部命令");break;
+		case 1:System.out.println("全部显示命令");break;
+		case 2:System.out.println("打开用户");break;
+		case 3:System.out.println("删除用户");break;
+		case 4:System.out.println("初始化");break;
+		}
+		
+		
+	}
+
+}
+
+
+public class demo07 {
+
+	public static void main(String[] args) {
+		for (int i=0 ; i<3 ; i++) {
+			System.out.print(i);
+			
+		}
+		System.out.println("bye~");
+	}
+
+}
+
+
+public class demo08 {
+/**
+ * 
+ *实现1——2+3+4.。。+10000的累加运算
+ *
+ */
+	public static void main(String[] args) {
+		int sum = 0;
+		for(int i = 1;i<=10000; i++) {
+			sum = sum +i;
+		}
+		System.out.print(sum);
+
+	}
+
+}
+
+package day002;
+/**
+ * 
+ * 实现
+ * product=1*2*3。。。*20
+ *
+ */
+public class demo001 {
+
+	public static void main(String[] args) {
+		long product = 1;
+		for(long i = 1; i<=20; i++) {
+			product*=i;
+		}
+		System.out.println(product);
+	}
+
+}
+
+package day002;
+/**
+ * 
+ *PI=4*((1/1-1/3)+(1/5-1/7)+(1/9-1/11)…)
+ *
+ */
+public class demo002 {
+
+	public static void main(String[] args) {
+		
+		double sum=0;
+		for(int i =1;i<=10000;i+=4) {
+			sum +=1.0/i-1.0/(i+2);
+		}
+		 double pi =4*sum;
+		 System.out.println(pi);
+		
+		 
+	}
+
+}
