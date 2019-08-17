@@ -1,0 +1,95 @@
+package day002;
+
+public class demo006 {
+
+	public static void main(String[] args) {
+		for (int i= 1 ; i<=10; i++) {
+			if(i==3) {
+				break;
+			}
+			System.out.println(i);
+		}
+		System.out.println("over");
+	}
+
+}
+
+package day002;
+
+public class demo005 {
+
+	public static void main(String[] args) {
+		//continue 重新开始循环
+		//i=1 i<=10 i<3 continue    i=2   i<=10
+		//1-2-true-3-true-3.2-4-2-true-
+		//i<3  continue  i=3 i<=10  i<3
+		//3.1-true-3.2-4-2-true-3.1-false-
+		//print(i) i=4  i<=10  i<3   print(i)
+		// 3.3-4-2-true-3.1-false-3.3…..
+
+		for (int i= 1 ; i<=10; i++) {
+			if(i<3) {
+				continue;
+			}
+			System.out.println(i);
+		}
+	}
+
+}
+
+
+访问控制：封装，将数据封装到类的内部，将算法封装到方法中
+封装结果：存在但是不可见
+
+Public ：任何位置可见，修饰：属性，类，方法，内部类
+		跨包访问类。需要使用import语句导入。
+Protected ： 当前包中可见，子类中可见。只可以修饰类的成员
+		只能在类体中使用，包括：属性，方法，内部类
+默认的 ：当前包内部可见，就是没有任何修饰词，修饰：类，属性
+方法，内部类等，在实际项目中很少使用。
+Private ： 仅仅在类内部可见。修饰类的成员：属性，方法，内部类
+
+默认类（包内类）的访问范围：当前包内内部可见，不能在其他包中访问
+类的访问访问受限！
+//Point类是默认修饰，仅仅在day01包内可见，当前包day04
+//不能看见，不能访问
+在企业项目中建议：所有类都是公用类。封装的类使用内部类！
+
+Java 文件规则：
+1 一个JAVa源文件中可以有多个类，但只能有一个公用类！
+其他类只能是默认类（包中类）而且java的文件夹一定与公用类类名一致！如果没有公有类，可以和任何一个文件名一致
+2 一般建议：一个文件一个公有类！一般不在一个文件中写多个类
+
+私有的方法不能继承，也不能重写
+分支结构
+If 。。。 else
+可以处理一切分支判断
+Switch。。。case
+只能处理根据整数结果进行的多路分支
+利用流程控制语句解决业务问题：要搞清数据（变量）的操作步骤！
+For的执行顺序
+For（/*1*/；/*2*/；/*4/）{
+/*3*/
+}
+/5*/
+1-2-true-3-4-2-true-3-4-2-false-5
+
+For经常用于执行记次数i，3，5，7.。。
+For的灵活运用
+1）	for（；；）是死循环与while（true）一样，在死循环中经常利用break结束循环过程。
+2）	for（；布尔表达式；）与while（布尔表达式）一致
+while的执行顺序
+/*0/
+while（布尔表达式/*1/）{
+/*2*/
+}
+/*3/
+（0）-1-true-2-1-true-2-1-false-3 
+//continue 重新开始循环
+//i=1 i<=10 i<3 continue    i=2   i<=10
+//1-2-true-3-true-3.2-4-2-true-
+//i<3  continue  i=3 i<=10  i<3
+//3.1-true-3.2-4-2-true-3.1-false-
+//print(i) i=4  i<=10  i<3   print(i)
+// 3.3-4-2-true-3.1-false-3.3…..
+
