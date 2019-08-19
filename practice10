@@ -1,0 +1,91 @@
+package day002;
+
+public class demo007 {
+
+	public static void main(String[] args) {
+		int num = 2365;
+		int b;
+		//*b = num % 10;
+		//num /= 10;// num=236;
+		//b = num % 10;
+		//num /=10;// num=23;
+		//b = num % 10;
+		//num /=10;// num=2;
+		//b = num % 10;
+		//num /=10;// num=0;
+		//if (num==0) { break;}
+		while (true) {
+			b = num % 10;
+			num /= 10;
+		if(num==0) {
+			break;
+		}
+		System.out.println("b"+b);
+		}
+
+	}
+}
+
+
+
+package day002;
+/**
+ * 判断一个数是不是水仙花数
+ * 判断10000以内的水仙花数
+ */
+
+
+public class demo008 {
+
+	public static void main(String[] args) {
+/**for (int i = 1;i<=10000; i++) {
+		Scanner console = new Scanner(System.in);
+		System.out.println("请输入1~10000内数字");
+		int num = console.nextInt();
+		int d;
+		int sum = 0;//sum代表3次方的累加和
+		int n = num;//n,原始数据
+		//*b = num % 10;
+		//num /= 10;// num=236;
+		//b = num % 10;
+		//num /=10;// num=23;
+		//b = num % 10;
+		//num /=10;// num=2;
+		//b = num % 10;
+		//num /=10;// num=0;
+		//if (num==0) { break;}
+		while (true) {
+			d = num % 10;//获取num的最后一位数
+			sum += d*d*d;//累加三次方的和到sum
+		//	System.out.println("d"+d);
+			num /= 10;//消除num的最后一位
+		if(num==0) {
+			break;
+		}//如果去除最后一位以后为0就结束循环
+		//System.out.println(sum);
+		if(sum==n) {//如果三次方的累加和和原始数据一样，就是水仙花数
+			System.out.println(n+"是水仙花数");
+		}
+		else {
+			System.out.println(n+"不是水仙花数");
+		}
+		}
+*/
+		for (int i = 1;i<=10000; i++) {
+			int num = i;
+			int sum = 0;
+			while (num!=0) {
+				int d = num % 10;
+				sum += d*d*d;
+				num/=10;
+	
+	}
+			if(sum==i) {//如果三次方的累加和和原始数据一样，就是水仙花数
+				System.out.println(i+"是水仙花数");
+			}
+	
+
+		}
+
+	}
+}
