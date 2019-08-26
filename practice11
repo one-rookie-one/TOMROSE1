@@ -1,0 +1,97 @@
+package day002;
+/*
+ * prime number 质数
+ */
+public class demo009 {
+
+	public static void main(String[] args) {
+		for(int num = 2 ;num<=1000; num++) {
+		//int num = 11;
+		boolean isPrime = true;
+		for(int n = 2; n<=num/2; n++) {
+			//System.out.println(num+","+n);
+			if(num%n==0) {//检查num是否能够被n整除
+			isPrime = false;//如果整除了就不是质数
+			break;//如果能够整除，就不在比较下一个n了
+		}
+		}
+		if(isPrime ) {
+			System.out.println(num+"是质数");
+		}
+	}
+}
+
+}
+
+package day002;
+
+public class demo010 {
+
+	public static void main(String[] args) {
+		next:for(int num = 2; num<1000; num++) {
+			for(int n = 2; n<=num/2; n++) {
+			if (num%n==0)//整除发现num不是质数就直接跳到下一个num
+			continue next;//回到外层循环的下次，就是检查下一个num
+			//打断了当前的循环，继续执行next标号的外层循环
+		}
+			System.out.println(num+"是质数");
+	}
+	
+	}
+}
+	
+package day002;
+
+import java. util.Scanner;
+
+public class demo011 {
+
+	public static void main(String[] args) {
+		Scanner console = new Scanner(System.in);
+		char c;
+		do {
+			System.out.println("请输入一个数");
+			String str = console.nextLine();
+			c= str.charAt(0);
+		}
+		while(c<'0'||c>'9');
+		
+	
+	}
+
+}
+//* 查找一个范围内所有的质数
+质数：大于1的数，可以被1整除，可以被自身整除。不能被其他数整除‘：
+反之如果能被另外一个数整除就不是质数
+假设一个数是num：
+另外一个数是n：
+如：2.3.5.7.11
+·1. 判断一个数是否是质数
+	不能被其他数整除：反之如果能够被另外一个数整除就不是质数
+	假设一个数是num
+	另外一个数n:n的范围：{2，n/2},
+	如num=100,可整除100的数n一定在【2，50】范围内！
+	整除：num%n==0 整除，如果整除就不是质数
+	如果比较了所有的数，都没有整除，这个数就是质数
+	Int num
+	For(int n=2;n<=num/2;n++){
+	If(num%n==0){
+	//当前的num不是质数！
+	Isprime = false;
+	}
+	}
+	If(isPrime){
+	System.out.println(num+”是质数！”);
+	
+·2.找出一个范围内所有的质数
+`num = 2~1000
+带标号的continue 和break 使用的不多，知道即可
+Do{
+While（）；
+输入规则检验
+1.	输入一个文本 String str= console。Nextline（）；
+2.	如果输入的文本不是数 返回1
+Char c = str。CharAt（0）
+c>’0’ || c<’9’ 说明c不是数字字符 返回1）
+3.	如果不满足 输入的是数据
+4.	显示数据
