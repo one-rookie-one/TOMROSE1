@@ -1,0 +1,69 @@
+package day002;
+
+import java.util.Arrays;
+/*
+ * final变量只能初始化一次，不能再修改
+ */
+public class demo013 {
+	public static void main(String[] args) {
+		final String s = "ABC";
+		final String[]ary = {"A","B"};
+		//ary:数组变量，ary【0】数组元素
+		ary[0] = "Tom";//数组元素可以修改
+		System.out.println(Arrays.toString(ary));
+
+	}
+
+}
+
+
+package day002;
+
+public class demo012 {
+
+	public static void main(String[] args) {
+		new Goo();
+		new Goo();
+	}
+
+}
+	class Goo{
+		{//代码块，在创建对象时候进行！类似于构造器的使用
+			System.out.println("HI");
+		}
+		static {//静态代码块，在类的加载期间进行，只执行一次
+			System.out.println("Loading Goo.class");
+			
+		}
+	}
+	
+  Point 类是默认修饰，仅仅在day01包内可见，当前包day04
+不能看见，不能访问
+调用当前类型的test（）方法
+私有的方法不能继承，也就不是重写
+Static final 
+Static：静态的只能在类内部使用，可以修饰：属性，方法，内部类静态代码块
+静态修饰的成员：属于类级别的成员，是全体类实例共享的资源
+静态属性：只有一份，全体实例共享，类似于全局变量
+静态方法：属于类的方法，使用类名直接调用，不需要创建对象而且没有方法中没有隐含参数this，不能访问当前对象资源
+Final：最终的，可以修饰：类，方法，变量（属性，局部变量）
+Final的类：不能再继承
+Final的方法：不能再重写
+Final的方法和类，阻止了动态代理模式！
+动态代理模式广泛应用在： spring Hibernate Struts2
+企业编程规范：不允许使用final的方法和类！
+
+Final的变量：final变量只能初始化一次，不能再修改
+
+Ary-----：数组变量       ary【0】 数组元素
+常量：
+Public static final double PI = 3.14;
+对象数组
+所谓的对象数组，是对象的元素不是基本类型，而是引用类型
+Point【】ps = new point【3】：
+Ps 【0】 = new point（1，2）；
+Ps 【1】 = new point（3，4）；
+Ps 【2】 = new point（5，6）；
+数组ps的每一个元素都是point类型的引用，都将指向一个point类型的对象。初始化对象数组时，要注意将其每一个元素进行实例化
+
+  
