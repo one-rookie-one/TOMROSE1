@@ -1,0 +1,103 @@
+package day002;
+
+import java.util.Scanner;
+
+public class demo014 {
+
+	public static void main(String[] args) {
+	Scanner console = new Scanner(System.in);
+	String str;
+	char c;
+	while (true) {
+		System.out.println("请输入一个数");
+		str = console.nextLine();
+		c = str.charAt(0);
+		if (c>='0'&&c<='9') {
+			break;
+			
+		}
+	System.out.println("输入错误！");
+	}
+	System.out.println(str);
+	int n = Integer.parseInt(str);
+	System.out.println(n);
+		
+	}
+
+}
+
+package day002;
+/*
+ * 数组
+ * 
+ */
+public class demo015 {
+
+	public static void main(String[] args) {
+		int []  ary;//声明数组变量ary
+		ary = new int[3];
+		//new int【3】创建数组对象，简称创建数组
+		//ary = 数组对象，表示ary的值引用了一个数组对象new int【10】
+		int[] ary2 = ary;
+		//是引用的赋值，复制结果ary2和ary
+		//引用了同一个数组对象
+		ary[0] = 0;
+		System.out.println(ary2[0]);
+		
+		/*\
+		 * Int【】ary3 = new int【3】；//元素自动化为0
+		 
+				System.out.println(ary3[0]);//0
+				System.out.println(ary3[1]);//0
+				System.out.println(ary3[2]);//0
+				Double【】ary4 = new double【3】；
+				System.out.println(ary4[0]);//0.0
+				Boolean【】ary5 = new Boolean 【3】；
+				System.out.println(ary5[0]);//flase
+				Char 【】 ary6 = new char【3】；
+				System.out.println((int)ary6[0]);
+				// System.out.println（ary6[0]);//控制字符\u0000 显示无效果
+		*/
+
+	}
+
+}
+
+package day002;
+
+public class demo016 {
+
+	public static void main(String[] args) {
+		int[] ary1=new int[] {3,4,5};
+		System.out.println(ary1.length);
+		System.out.println(ary1[0]);
+		System.out.println(ary1[1]);
+		System.out.println(ary1[2]);
+		//System.out.println(ary1[3]);
+		System.out.println(ary1[ary1.length-1]);
+		ary1[0] = 8;
+		ary1[1]++;
+		System.out.println(ary1[0]);
+		System.out.println(ary1[1]);
+		
+		
+	}
+
+}
+
+package day002;
+
+public class demo017 {
+
+	public static void main(String[] args) {
+	int[]ary = {1,1,2,3,5,8,13,21,34,55};
+	int sum = 0;
+	for (int i = 0; i<ary.length;i++) {
+		int n = ary[i];
+		System.out.println(i+":"+n);
+		sum+=n;
+	}
+	System.out.println(sum);
+	}
+
+}
