@@ -1,0 +1,98 @@
+package day002;
+
+/**
+*计算x，y中的最大值
+*方法名：与功能命名一致，一般使用动词命名！
+*一般使用小写字母开头，第二个单词开始，单词首字母大写
+*saveOrder（）
+*返回值：方法必须定义返回值，如果无返回值定义void 
+*如果定了返回值，在方法中必须使用return语句返回数据
+*如下是方法的声明（定义），方法定义在类体中！
+**/
+
+public class demo019 {
+	public static int max(int x, int y) {
+		return x>y?x:y;
+	}
+	public static void main(String[] args) {
+		//方法的调用L使用方法名和参数列表调用方法如 max（3，4）
+		//Max（3）；//编译错误：没有max（int）的方法
+	max(10,3);
+	int n = max(10,3);
+	System.out.println(n);
+	int x= 5;
+	int y= 6;
+	int z=max(x,y);
+	System.out.println(z);
+	}
+
+}
+
+package day002;
+
+/*/*随机生成双色球
+*33 红球取6
+* 16 蓝球取1
+* 7个2位数号码
+*1，在33元素的数组中取出6个不重复的元素
+*先定义33个元素的数组表示球池pool（池）
+*在定义使用标记boolean数组，代表某个秋是否被取出过
+*used:用过 0  1  2 ….
+* pool = {01，02，03,….}
+*used = { f,f,f,….}
+*balls = {null,null,null,null,…}
+*ball: 球 balls 保存抽取结果的空位置，6个！
+* i=1  	代表balls中下一个空位置的index，还表示已经抽取的球的数量
+*
+*1，生成随机数 n ,n的范围 0<=n<33 假设n=1
+*2. 检查n对应的球使用标记used[n]
+*3.如果使用过，used【n】的值是true，就返回1
+4.如果没有使用过就取出球 pool 【n】送到 balls【i++】
+*balls【i++】=pool【n】
+* 将n对应的使用标记设置为true，表示使用过了！
+*5. 检查balls 球的数量，如果满了就结束
+* 	Boolean full = I = 6 ==balls，length
+*6. 返回1
+*/
+import java.util.Random;
+public class demo18 {
+
+	public static void main(String[] args) {
+	String [] pool = {"1","2","3","4","5","6","7","8","9","10","11",
+			"12","13","14","15","16","17","18","19","20","21","22",
+			"23","24","25","26","27","28","29","30","31","32","33"
+			};
+	boolean[] used = new boolean[pool.length];
+	String[] balls = {null,null,null,null,null,null};
+	int i = 0;//代表balls中下一个空位置的index，还表示已经抽取的球的数量
+	Random random = new Random();
+	while(true) {
+		int n = random.nextInt(pool.length);//随机生成n
+		if(used[n]) {//检查n有没有被使用过
+			continue;
+		}
+		balls[i++] = pool[n];//如果n没有被使用过就取出n
+		used[n]=true;//设置n是使用过的
+		if(i==balls.length) {//i的值是6就结束
+			break;
+		}
+		for(i=0;i<balls.length;i++) {
+			System.out.print(balls[i]+"");//打印每个生成的球
+		}
+	}
+	
+		
+	}
+
+}
+
+方法要素—返回值
+·方法调用结束后可以返回一个数据，称之为返回值。
+·方法在声明是必须指定返回值的类型。
+·如果方法没有返回值（即方法不需要返回数据）。
+需将返回值类型声明为void。
+·通过return语句返回，return语句的作用在于结束方法且将数据返回。
+
+方法要素-参数列表
+、
+方法的定义
