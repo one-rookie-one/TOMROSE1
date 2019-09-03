@@ -1,0 +1,70 @@
+package day002;
+
+import java.util.Arrays;
+
+public class Demo4 {
+
+	public static void main(String[] args) {
+		String[]names = {"cao","zhang","liu","wang","li"};//查找li的位置
+		int index = Arrays.binarySearch(names, "li");
+		Arrays.sort(names);//排序
+		index = Arrays.binarySearch(names, "li");
+		System.out.println(Arrays.toString(names));
+		System.out.println(index);//返回结果小于0没有找到
+		boolean found = index>=0;
+		if(!found) {
+			System.out.println("查无此人");
+		}
+	}
+
+}
+
+数组
+什么是数组：类型一致的一组数据，相当于集合概念
+在软件中解决一组，一堆， XXXX数据时侯使用数组。
+数组变量：是引用变量 （不是基本类型变量）引用变量通过数组的内存位置引用了一个数组（数组对象），栓到数组对象的绳子。
+Int【】ary = new int【3】// ary-----》（0，0，0）；《-------ary1
+Int【】ary；//ary 的地址赋值给ary1
+//ary 与 ary1 绑定了同一个数组
+//ary【1】与 ary【1】 是同一个元素
+数组变量不是数组（数组对象）
+
+数组（数组对象）：
+	有3钟创建（初始化）方式
+1）	new int 【3】 给元素数量，适合不知道具体元素，元素数量较多时
+2）	new int【】{3，4，5}；不需要给出数量，直接初始化具体元素
+适合，知道数组的元素。
+3）	{2，3，4}静态初始化，是（2）简化版，只能用在声明数组变量时候直接初始化。
+数组元素：的访问
+1）	数组长度问题，与数组下标，长度使用属性访问：ary。Length 获取数组下标
+2）	与数组下标：范围：0~length-1就是【0，length】 
+超范围访问会出现：下标越界异常
+3）	使用【idex】访问数组元素：ary【2】
+
+方法（函数function=功能）method： y= f（x）
+什么是方法：一个算法逻辑功能的封装，是一般完成一个业务功能
+如：登陆系统，创建联系人，简单说方法是动作，是动词
+方法名：一般按照方法实现的功能定名，一般使用动词定义
+如：login（） createCintact()  createAnswer()
+方法参数: 是方法的前提条件，是方法执行依据，是数据
+如 Login (String id ,string pwd)
+方法返回值:功能执行的结果
+如 ：char【】 createAnswer（）
+
+API部分常用方法
+Math类提供常用属性函数：更多的请参阅：JAVA DOC 手册
+记住：java。Lang。math
+Math，sqrt（）开平方 
+Math.sin()
+Math.cos()
+Math.tg、
+Math.pow(x,y)计算x的y次方
+记住：java。Utill。arrys
+Arrays。Sort（）
+Arryays，euqals（）
+ArraysbingarySearch（）
+
+Arrays
+
+案例
+
