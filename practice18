@@ -1,0 +1,162 @@
+package day002;
+/*
+ *
+ * 2进制
+ * 移位运算符
+·左移（<<）。算数右移（>>）、逻辑右移>>>。
+·移位运算针对于整数做二进制移动。
+
+移位运算的数学意义
+12300.
+小数点向左移动，1230.0，相当于数字向右移动，结果是/10（基数）上述是10进制数字右移的数学意义！
+
+2进制数字数学右移： 相当于数学/2（基数）
+
+ */
+
+public class Demo7 {
+
+	public static void main(String[] args) {
+		int a = 0xfffffffe;//-2
+		//a = 11111111 11111111 11111111 11111110
+		int b = a<<1;
+		// 数字左移，数学移位  	b = 11111111 11111111 11111100
+		int c = a>>1;
+		// 数字右移 数学移位  高位是1就补1，高位是0就补0    c = 11111111 11111111 11111111 11111111
+		int d = a>>>1;
+		//逻辑移位       d = 01111111 11111111 11111111 11111111
+		int y = 100;
+		int z = y>>2;
+		System.out.println(z);
+		System.out.println(Integer.toBinaryString(a));
+		System.out.println(Integer.toBinaryString(b));
+		System.out.println(Integer.toBinaryString(c));
+		System.out.println(Integer.toBinaryString(d));
+		
+		
+
+	}
+
+}
+
+package day002;
+/*
+ * 补吗算法
+ 10				2
+-8			1000
+-7			1001
+-6			0110
+-5			1011
+-4			1100
+-3			1101
+-2			1110	+1=1111 ~4+1 = -4
+-1			1111	+1 = 0000
+
+0			0000
+1			0001
+2			0010
+3			0011
+4			0100
+5			0101
+6			0110
+7			0111
+
+Byte 类型 9 位补码
+最小值	10000000
+-1·：	11111111
+最大值：01111111
+
+Short 类型 16位补码
+最小值：10000000 00000000
+-1：	11111111 11111111
+最大值：01111111 11111111
+
+Int 类型32位补码
+最小值：10000000 00000000
+		00000000 00000000
+-1：	11111111 11111111
+		11111111 11111111
+
+最大值	01111111 11111111
+		11111111 11111111
+
+Long类型 64位补码
+最小值	ox800000 00000000
+-1		oxfffffff ffffffff
+最大值	oxffffff ffffffff
+
+ */
+public class Demo6 {
+
+	public static void main(String[] args) {
+		int i =-1;
+		int max = 0x7fffffff;
+		int min = 0x80000000;
+		long maxl = 0x7ffffffffffffl;
+		System.out.println(Integer.toBinaryString(i));
+		System.out.println(Integer.toHexString(i));
+		System.out.println(Integer.toHexString(max));
+		System.out.println(Integer.toBinaryString(max));
+		System.out.println(Long.toBinaryString(maxl));
+		System.out.println(Long.toHexString(maxl));
+		
+
+	}
+
+}
+
+package day002;
+/*
+ * 16进制是2进制的缩写
+逢16进1
+基数：16
+数字：123456789abcdef
+权：256 16 1
+
+10		16		2
+0		0	0000 0000
+1		01	0000 0001
+2		02	0000 0010
+3		03	0000 0011
+4		04	0000 0100
+5		05	0000 0101
+6		06	0000 0110
+7		07	0000 0111
+8		08	0000 1000
+9		09	0000 1001
+10		0a	0000 1001
+11		0b	0000 1011
+12		0c	0000 1100
+13		0d	0000 1101
+14		0e	0000 1110
+15		0f	0000 1111
+16		10
+
+ */
+public class Demo5 {
+
+	public static void main(String[] args) {
+		//0011 0001 0010 0110 0010
+		char n = 0x3262;
+		System.out.println(n);
+				
+	}
+
+}
+
+递归调用：方法中调用了方法本身
+递归解决问题：简练只需考虑一层逻辑即可！但是需要有经验。
+			一定要有结束条件！递归层次不饿能太深。
+总之：慎用递归！
+
+二进制基础
+1）计算机中一切数据都是2进制的！基本类型，最想，音频，视频
+2）10进制是人类习惯，计算按照人类习惯利用算法输入输出
+“10”—算法转化—1010（2）
+1010—算法转化—“10”
+3）16进制是2进制的简写，16进制就是2进制！
+16进制
+逢16进1
+基数：16
+数字：123456789abcdef
+权：256 16 1
