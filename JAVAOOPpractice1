@@ -1,0 +1,130 @@
+package day002;
+/*
+ * Int类型解析
+二进制运算演示
+//ip = 11000000 10101000 00000001 00001010
+//b1 = 00000000 00000000 00000000 11000000
+//b2 = 00000000 00000000 00000000 10101000
+//b3 = 00000000 000000000 00000000 0001010
+业务：将b1，b2，b3，b4拼接为一个IP地址
+合并 b1 b2 b3 b4 为一个IP地址
+ */
+public class Demo8 {
+
+	public static void main(String[] args) {
+		int b1 = 192;
+		int b2 = 168;
+		int b3 = 1;
+		int b4 = 10;
+		int ip = (b1<<24)+(b2<<16)+(b3<<8)+b4;
+		System.out.println(Integer.toBinaryString(b1<<24));
+		System.out.println(Integer.toBinaryString(b2<<16));
+		System.out.println(Integer.toBinaryString(b3<<8));
+		System.out.println(Integer.toBinaryString(b4));
+		
+	}
+
+}
+
+package day002;
+/*
+ * 将32位计算机的颜色拼接成 rgb三种颜色
+ */
+
+public class Demo9 {
+
+	public static void main(String[] args) {
+		int color = 0xD87455;
+		int b = color & 0xff;
+		System.out.println(b);
+		int a = (color>>>16) & 0xff;
+		System.out.println(a);
+		int g = (color>>>8) & 0xff;
+		System.out.println(g);
+		int red = 216;
+		int green = 116;
+		int blue = 85;
+	}
+
+}
+
+package JavaOopDay1;
+
+public class Demo1 {
+
+	public static void main(String[] args) {
+		Point p1;
+		p1 = new Point();//对象 P1
+		p1.x = 3;// . 叫做取成员运算，可以理解为“的”
+		p1.y = 4;
+		p1.z = 5;
+		Point p2;
+		p2 = new Point();
+		p2.x = 5;
+		p2.y = 5;
+		p2.z = 5;
+		System.out.println(p1.x+","+p1.y+","+p1.z);
+	}
+
+}
+class Point{//类
+	int x;
+	int y;
+	int z;
+}
+class Resuit{
+	int match;
+	
+}
+
+package JavaOopDay1;
+
+public class Demo2 {
+
+	public static void main(String[] args) {
+		Foo f = new Foo();
+		System.out.println(f.a);
+		System.out.println(f.b);
+		System.out.println((int)f.c);
+		System.out.println(f.d);
+		System.out.println(f.e);
+		int a;//main 方法中的声明的局部变量
+		//局部变量在栈中分配
+	}
+
+}
+class Foo{
+	int a;//是类中声明的实例变量，成员变量，自动初始化
+	double b;//实例变量，对象属性：在堆中对象中分配
+	char c;//每个类型都有自己的实例变量，属性
+	boolean d;
+	String e;
+}
+
+package JavaOopDay1;
+
+public class Demo3 {
+
+	public static void main(String[] args) {
+		Point1 p1 = new Point1();
+		p1.x = 10;
+		p1.y = 11;
+		p1.up(5);//在当前对象上执行的方法，是对象的方法
+		//up方法的运算修改了y的属性
+		System.out.println(p1.x+","+p1.y);
+		Point1 p2 = new Point1();
+		p2.x = 6;
+		p2.y = 7;
+		p2.up(8);
+		System.out.println(p2.x+","+p2.y);
+
+	}
+
+}
+class Point1{
+	int x;
+	int y;
+	public void up(int dy) {
+		y -= dy;
+	}
+}
