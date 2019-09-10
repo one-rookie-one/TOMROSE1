@@ -1,0 +1,130 @@
+package JavaOopDay1;
+/*构造方法= = 构造器
+构造器语法：在类中定义，方法名与类名一样！包括大小写
+不能定义返回值
+构造器的作用，用于创建对象，初始化对象属性，
+构造器的参数：一般是初始化对象的前提条件。
+
+默认构造器
+New  运算调用的是构造器！
+1）	类一定有构造器！记住，这是真的，不允许质疑！
+A．	如果类没有声明（定义）任何的构造器，JAVA编译器会自动插入默认构造器~
+B．	如果类声明了构造器，JAVA编译器将不再提供默认构造器
+默认构造是无参数，方法体是空的构造器
+ * 
+ */
+public class Demo6 {
+
+	public static void main(String[] args) {
+	Foo foo = new Foo();
+	Koo koo = new Koo(6);
+	}
+
+}
+class Foo{};
+class Koo {
+	public Koo(int a) {
+	System.out.println("Call Koo(int)");}
+}
+package JavaOopDay1;
+/*
+ * this 是方法中对当前对象的引用，本质是方法的隐藏参数
+ *This 在运行期间隐含绑定到当前“这个对象”
+ */
+public class Demo5 {
+
+	public static void main(String[] args) {
+		Point2 p1 = new Point2();
+		p1.x = 6;
+		p1.y = 7;
+		p1.up(3);
+		System.out.println(p1.x+","+p1.y);
+		
+		Point2 p2 = new Point2();
+		p2.up(4);
+		System.out.println(p2.x+","+p2.y);
+
+	}
+
+}
+class Point2{
+	int x;
+	int y;
+	public void up(int dy ) {
+		this.y = this.y - dy;
+	}
+}
+
+package JavaOopDay1;
+
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
+/*
+ * API中的重载
+ */
+public class Demo4 {
+
+	public static void main(String[] args) {
+		//Arrays。sort()是重载的方法
+		int[] ary = {3,4,5,6};
+		Arrays.sort(ary);
+		String[] names = {"Tom","Luna","Jugg"};
+		Arrays.sort(names);
+		//println 是重载的方法 println（char[]）
+		int[] ary1 = {'A','B','C'};
+		char[] ary2 = {'A','B','C'};
+		System.out.println(ary1);//println（Object）
+		System.out.println(ary2);//println(char[])
+		System.out.println('中');//println(char)
+		System.out.println((int)'中');//println(int)
+	}
+
+}
+
+
+方法的调用与this关键字
+一个类可以创建多个对象（存储与堆中）
+方法参数传递原理 与 this关键字
+Point2 this 
+//this 是方法中对当前对象的引用，本质是方法的隐藏参数
+This 在运行期间隐含绑定到当前“这个对象”
+二进制
+1.	计算机只能处理二进制数据，计算机内能一切都是二进制数据，任何软件业务都要转化为二进制数据处理！
+如‘中’ = 4e2d
+2 10进制，计算是不能直接识别的，需要利用算法转化01000001 – 显示过程 Integer.toString(i)-”65”
+Println(5)—println(Integer.toString(5))”5”
+“65”—Integer.parseInt(“65”)01000001
+3 16进制：是二进制的简写形式，方便书写二进制数据。
+4 补码：解决了符号问题。
+5，位运算：按照每个二进制数位进行运算。
+经典的位运算：掩码运算
+Int a = 267;
+Int mask = 0xff;//mask:面具 掩码
+Int b = a& mask;
+
+Object:对象，东西
+一切皆是对象 ==啥都是东西
+对象：存在的一个东西！
+类：概念，是同类东西的概念，简单说就是名词
+引用：代词，是对象的引用，就像拴着对象的绳子
+引用本身不是对象！引用指代了对象！
+引用的值是对象的地址值，通过地址值引用了对象。
+引用的值不是对象！
+
+引用变量在运行期间动态绑定到对象！
+
+
+
+构造方法= = 构造器
+构造器语法：在类中定义，方法名与类名一样！包括大小写
+不能定义返回值
+构造器的作用，用于创建对象，初始化对象属性，
+构造器的参数：一般是初始化对象的前提条件。
+
+默认构造器
+New  运算调用的是构造器！
+1）	类一定有构造器！记住，这是真的，不允许质疑！
+A．	如果类没有声明（定义）任何的构造器，JAVA编译器会自动插入默认构造器~
+B．	如果类声明了构造器，JAVA编译器将不再提供默认构造器
+默认构造是无参数，方法体是空的构造器
