@@ -1,0 +1,236 @@
+package JavaOopDay1;
+
+public class Rect extends shape{
+		int width;
+		int heigh;
+		public Rect(int x,int y,int w,int h) {
+			super.x = x;
+			this.y = y;
+			this.width = w;
+			this.heigh = h;
+		}
+		public double area() {
+			return width*heigh;
+		}
+}
+
+package JavaOopDay1;
+
+public class Demo13 {
+
+	public static void main(String[] args) {
+
+	}
+class Cell{
+	int x; int y; 
+	public Cell() {
+		this(1,1);//调用本类构造器
+	}
+	public Cell(int x,int y) {
+		this.x = x; this.y = y;
+	}
+}
+}
+
+package JavaOopDay1;
+/*
+ * 关于super（）：一定在子类构造器第一行使用！如果没有默认存在super()!
+是JAVA默认添加的super()
+
+ */
+public class Demo12 {
+
+	public static void main(String[] args) {	
+
+	}
+class Eoo{}
+class Roo extends Eoo{
+	public Roo() {
+		super();//必须在构造器第一行使用
+		System.out.println("Call Roo()");
+	}
+	public Roo(int a) {}
+}
+}
+
+package JavaOopDay1;
+/*
+ * 
+1.	类一定有构造器
+2.	子类一定调用父类构造器
+2.1	子类构造器默认调用父类无参数构造器
+2.2	如果父类没有无参数构造器，必须使用super（）调用父类构造器
+
+ */
+public class Demo11 {
+
+	public static void main(String[] args) {
+
+	}
+class Qoo{
+	public Qoo(int s) {
+		System.out.println("Call Qoo(int)");
+	}
+}
+class Woo extends Qoo{
+	public Woo() {
+		super(100);//super(100)调用了父类Qoo(int)构造器
+	}
+}
+}
+
+package JavaOopDay1;
+/*
+ * 1）	构造器是不能继承的
+2）	子类型构造器默认调用父类型的无参数构造器
+
+ */
+
+public class Demo10 {
+
+	public static void main(String[] args) {
+		
+	}
+		Moo moo = new Moo();
+		//输出结果：A 无 BCall Noo c 编译错误   D运行异常
+		Loo loo = new Loo();
+	}
+class Noo{
+	public Noo() {
+		System.out.println("Call Noo()");
+	}
+}
+class Moo extends Noo{}
+class Soo{	
+	public Soo() {
+	}
+	public Soo(int a) {
+	System.out.println("Call Soo(int)");
+	}
+	}
+class Loo extends Soo{}
+
+package JavaOopDay1;
+
+public class Demo9 {
+
+	public static void main(String[] args) {
+		Circle c = new Circle(3,4,5);
+		shape s = c;
+		s.up();
+		//s和c引用了同一个对象new Circle(3,4,5)
+		System.out.println(c.x);
+		System.out.println(c.r);
+		//System.out.println(s.r);在shape上没有定义r属性
+		System.out.println(c.area());
+	}
+
+}
+
+package JavaOopDay1;
+/*
+ * Demo8和shape 和 Circle 在一个包中
+ * Circle 可以在shape中继承方法属性
+ * x属性和up方法定义在shape类中，被子类Circle继续了
+ */
+
+public class Demo8 {
+
+	public static void main(String[] args) {
+		Circle c = new Circle(3,4,5);
+		c.up();
+		System.out.println(c.x);
+		System.out.println(c.y);
+	}
+
+}
+
+package JavaOopDay1;
+/*
+ * 圆继承了图形，表示圆是一个图形。
+圆会自动继承父类型的属性和方法
+其中 shape称之为父类型（super class）
+Circle 称之为子类型（sub class）
+ */
+
+public class Circle extends shape{
+		int r;
+		public Circle (int x,int y,int r) {
+			this.x = x;
+			this.y = y;
+			this.r = r;
+		}
+		public double area(){
+			return Math.PI * this.r * this.r;
+		}
+}
+
+package JavaOopDay1;
+
+public class shape {
+ 
+		int x; int y;
+		public void up(int dy) {
+			y-=dy;
+		}
+		public void up() {
+			y--;
+		}
+
+}
+
+package JavaOopDay1;
+
+public class Demo7 {
+
+	public static void main(String[] args) {
+		//创建原点
+		Point3 o = new Point3();
+		//new Point(0,0)
+		Point3 p1 = new Point3(5);
+		Point3 p2 = new Point3(3,4);
+		System.out.println(p1.x+","+p1.y);
+	}
+
+}
+class Point3{
+	int x; int y;
+	public Point3() {
+		this.x = 0; this.y = 0;
+	}
+	public Point3(int x, int y) {
+		this.x = x; this.y = y;
+	}
+	public Point3(int x) {
+		this.x = x; this.y = x;
+	}
+}
+
+package JavaOopDay1;
+/*构造方法= = 构造器
+构造器语法：在类中定义，方法名与类名一样！包括大小写
+不能定义返回值
+构造器的作用，用于创建对象，初始化对象属性，
+构造器的参数：一般是初始化对象的前提条件。
+
+默认构造器
+New  运算调用的是构造器！
+1）	类一定有构造器！记住，这是真的，不允许质疑！
+A．	如果类没有声明（定义）任何的构造器，JAVA编译器会自动插入默认构造器~
+B．	如果类声明了构造器，JAVA编译器将不再提供默认构造器
+默认构造是无参数，方法体是空的构造器
+ * 
+ */
+public class Demo6 {
+
+	public static void main(String[] args) {
+	Foo foo = new Foo();
+	Koo koo = new Koo(6);
+	}
+
+}
+class Foo{};
+class Koo {
+	public Koo(int a) {
+	System.out.println("Call Koo(int)");}
+}
