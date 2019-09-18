@@ -1,0 +1,120 @@
+package JavaOopDay1;
+
+public class Demo16 {
+
+	public static void main(String[] args) {
+		shape s1 = new Circle(3,4,5);
+		print(new Circle(5,5,4),new Rect(5,5,6,7));
+	}
+	public static void print(shape s1,shape s2) {
+		for(int y = 0;y<20;y++) {
+			for(int x = 0;x<20;x++) {
+				if(s1.contains(x,y)&&s2.contaoins(x,y)) {
+					System.out.print("+");
+				}else if(s1.contains(x,y)) {
+					System.out.print("-");
+				}else if(s1.contains(x,y)) {
+					System.out.print("|");
+				}
+				else {
+					System.out.print(" ");
+				}
+			}
+		}
+	}
+}
+
+package JavaOopDay1;
+
+public class Demo15 {
+
+	public static void main(String[] args) {
+		Circle c = new Circle(3,4,5);
+		Rect r = new Rect(3,4,5,6);
+		shape s = c;
+		shape s1 = r;
+		//Circle x = c;
+		Circle x = (Circle)s;//正常执行
+		//Circle y = (Circle)s1;//运行异常，类型转换出错
+		//instanceof instace :实例 of:的
+		//instanceof 运算  检查变量引用的对象的类型是否兼容
+		//s引用的是圆的对象，s instanceof Circle 检查s引用的对象
+		//是否是Circle类型的实例！	
+		System.out.println(s instanceof Circle);
+		System.out.println(r instanceof Rect);
+		test(c);
+		test(r);
+	}
+	public static void test(shape s) {//多态的参数
+		//if(s instanceof Circle)保护了（Circle）s不会出现保护异常
+		//实现了安全类型转换
+		if(s instanceof Circle) {
+			Circle c = (Circle) s;
+			System.out.println("这是一个圆，面积"+c.area());
+		}
+		if(s instanceof Rect) {
+			Rect r = (Rect) s;
+			System.out.println("这是一个矩形，面积"+r.area());
+		}
+	}
+}
+
+package JavaOopDay1;
+/*
+ * 圆继承了图形，表示圆是一个图形。
+圆会自动继承父类型的属性和方法
+其中 shape称之为父类型（super class）
+Circle 称之为子类型（sub class）
+ */
+
+public class Circle extends shape{
+		int r;
+		public Circle (int x,int y,int r) {
+			this.x = x;
+			this.y = y;
+			this.r = r;
+		}
+		public double area(){
+			return Math.PI * this.r * this.r;
+		}//重写父类类型
+		public boolean contains(int x,int y) {
+			int a = this.x-x;
+			int b = this.y-y;
+			double c = Math.sqrt(a*a+b*b);
+			return c<=r;
+		}
+}
+
+package JavaOopDay1;
+
+public class Rect extends shape{
+		int width;
+		int heigh;
+		public Rect(int x,int y,int w,int h) {
+			super.x = x;
+			this.y = y;
+			this.width = w;
+			this.heigh = h;
+		}
+		public double area() {
+			return width*heigh;
+		}
+		public boolean contains(int x,int y) {
+		int dx = x-this.x;
+		int dy = y-this.y;
+		return 0<=dx && dx<width && 0<=dy && dy<heigh;
+		}
+}
+引用类型变量的类型转换
+Instaceof 运算 检查变量引用的对象的类型是否兼容
+//s引用的是圆对象， s instanceof Circle 检查s引用的对象
+//是否是Circle类型的实例！
+
+
+方法的重写（Overwrite）
+·子类可以重写（覆盖）继承自父类的方法，即方法名和参数列表与弗雷德方法相同；但方法的实现不同
+·当子类对象的重写方法被调用时（无论时通过子类的引用调用还是通过父类的引用调用），运行的是子类的重写后的版本。
+·在子类重写的方法中，可以通过super关键字调用父类的“原始”方法。
+
+
+重写方法的调用
