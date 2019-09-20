@@ -1,0 +1,128 @@
+package JavaOopDay2;
+
+public class Demo03 {
+
+	public static void main(String[] args) {
+		Boo b = new Boo();
+	}
+
+}
+class Aoo{
+	int a = 1;
+	public Aoo() {
+		this.test();
+	}
+	public void test() {
+		System.out.println("Aoo"+a);
+	}
+class Boo extends Aoo{
+	int b = 2;
+	public Boo() {
+		super();//默认构造器
+	}
+	public void test() {
+		System.out.println("Boo"+b+a);
+	}
+}
+}
+package JavaOopDay2;
+
+public class Demo02 {
+
+	public static void main(String[] args) {
+		
+		Woo woo = new Eoo();// 父类型变量引用了子类型对象
+		woo.test();//父类型Woo上声明的方法，子类型重写的方法
+		//动态绑定到Eoo对象，执行Eoo对象的方法
+		
+	}
+
+}
+class Woo{
+	public void test(){
+		System.out.println("Woo test()");
+	}
+class Eoo extends Woo{
+	public void test() {
+		System.out.println("Eoo test()");
+	}
+}
+}
+
+package JavaOopDay2;
+/*
+ * 1 继承时候对象的创建过程
+1）	Java首先递归加载所有类搭配方法区
+2）	分配父子类型的内存（实例变量）
+3）	递归调用构造器
+2 重写方法与重载方法的调用规则
+ */
+public class Demo01 {
+
+	public static void main(String[] args) {
+		QOO q = new QOO();
+		System.out.println(q.a+q.b+q.c);
+	}
+}
+class FOO{
+	int a = 3;
+	public FOO() {
+		a = 5;
+	}
+}
+class NOO extends FOO{
+	int b = 1;
+	public NOO() {
+		super();
+		b = 7;a = 8;
+	}
+}
+class QOO extends NOO{
+	int c = 5;
+	public QOO() {
+		super();
+		a = 8; b = 9; c = 10;
+	}
+}
+
+面向对象
+类型：对象的模板，是对象的数据结构定义，月饼模子
+对象：利用类最为模板创建的个体实例，本质是数据。相当于月饼
+引用：是对个体的标识名称，月饼的吊牌
+
+类中可以声明：成员变量，方法，构造器
+成员变量包括：实例变量，静态变量（今天变量）
+
+实例变量：用于声明对象的结构的，在创建对象时候分配内存每个对象都有一个
+
+方法：是用于对当前对象数据进行算法计算，实现业务功能
+方法是对象的功能，对象的动作，对象的行为：总之：动词
+
+构造器：用于创建初始化对象的方法，也叫构造方法
+构造器 区别与方法
+构造器：方法名与类名一致。不能定义返回值，使用new调用！
+功能目的不同：用于创建实例对象的
+如：Point 类构造器用于创建Point对象
+方法：方法名没有规定，必须定义返回值，使用对象引用调用
+功能目的不用：是对象的业务能力
+如：Point 的up方法用于 实现点对象向上移动的功能
+
+面向对象有3大特征：继承，多态，封装
+继承：父子概念的继承：圆继承于 图形
+圆是子概念（子类型subclass） 图形是父类型，(super class)
+集成在语法方面的好处：子类共享了弗雷德属性和方法的定义
+子类复用了弗雷德属性和方法。节省了代码。
+继承体现了多态：父类型变量可以引用各种各样的子类型实例
+个体的多态：父类型的子类型实例时多种多样的
+行为的多态：父类型的定义方法被子类重写时候多种多样的
+重写的方法在运行期间动态绑定到对象的方法
+
+1 继承时候对象的创建过程
+1）	Java首先递归加载所有类搭配方法区
+2）	分配父子类型的内存（实例变量）
+3）	递归调用构造器
+2 重写方法与重载方法的调用规则
+
+方法动态绑定到运行期间对象的方法
+ 
+
