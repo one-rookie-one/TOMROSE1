@@ -1,0 +1,308 @@
+package JavaOopDay2;
+/*
+ * final 表示初始化不能再修改
+ * static 表示只有一个
+ * static final 共同修饰的叫常量
+ * 常量：PI
+ * 字面量：3.14159265897
+ * 宏观说：字面量和常量称之为常量！
+ */
+public class Demo12 {
+	public static final double PI = 3,1415926535897;
+	public static void main(String[] args) {
+	Dog d1 = new Dog();
+	Dog d2 = new Dog();
+	System.out.println(d1.id+","+d2.id+","+Dog.numOfDogs);
+	}
+
+}
+class Dog{
+	final int id;//实例变量，每个对象一份，不能再次修改
+	static int numOfDogs=0;//静态，只有一份
+	public Dog(){
+		id = numOfDogs++;
+	}
+}
+
+package JavaOopDay2;
+/*
+Final关键字—修饰类
+·final关键字修饰的类不可以被继承
+
+True false null 不是关键字！是字面量
+关键字：if else while for class public
+Final 修饰的变量
+Final的变量只能初始化（赋值一次），不能再修改
+ */
+public class Demo11 {
+
+	public static void main(String[] args) {
+		final int a;
+		a = 5;//初始化
+		//a = 8; 
+		int b = 5;
+		b = 100;
+		b++;
+		test(5,6);
+	}
+	public static void  test(final int a,int b) {
+		//a++ 编译错误
+		System.out.println(a);
+	}
+}
+
+package JavaOopDay2;
+/*
+ * final方法不能被子类重写
+ */
+public class Demo10 {
+
+	public static void main(String[] args) {
+	}
+
+}
+class A{
+	public final void test(){
+		
+	}
+}
+class B extends A{
+	//public void test() {} 编译错误，子类不能重写父类的方法
+}
+
+package JavaOopDay2;
+/*
+ * final类不能继承子类型，可以防止父类对父类型的修改
+ * 工作中很少使用final的类
+ */
+
+public class Demo09 {
+
+	public static void main(String[] args) {
+	
+	}
+
+}
+final class Coo{
+	
+} 
+//class Voo extends Coo{} 编译错误
+//class MyString extends String{}
+//class MyInt extends Inteager{}
+//class MyMath extends Math{}
+package JavaOopDay2;
+/*
+ * 静态方法
+ * 静态方法中使用类名调用是属于类的方法
+ * 静态方法中没有this变量，不能访问当前对象
+ * 静态方法的作用一般用于工具方法，一般用于与当前对象无关工具方法
+ * 如：math.sqrt();
+ * Point up;
+ * 
+ */
+public class Demo08 {
+
+	public static void main(String[] args) {
+		Point p1 = new Point(3,4);
+		Point p2 = new Point(5,6);
+		System.out.println(p1.distance(p2));
+		double d = Point.distance(p1, p2);
+	}
+
+}
+class Point{
+	int x;
+	int y;
+	public Point(int x,int y) {
+		this.x = x;
+		this.y = y;
+	}
+	//静态方法中没有隐含参数this 在静态方法中没有this
+	//在静态方法中没有访问this的方法和属性
+	public static double distance(Point p1,Point p2) {
+		int a = p1.x-p2.x;
+		int b = p1.y-p2.y;
+		return Math.sqrt(a*a+b*b);
+	}
+	//计算一个点到另一个点的位置
+	public double distance(Point other) {
+		int a =this.x-other.x;
+		int b = this.y-other.y;
+		double c = Math.sqrt(a*a+b*b);
+		return c;
+		}
+}
+
+package JavaOopDay2;
+
+public class Deno07 {
+
+	public static void main(String[] args) {
+		Cat c1 = new Cat(5);
+		Cat c2 = new Cat(6);
+		System.out.println(c1.age+","+c2.age+","+Cat.numOfCats);
+	}
+
+}
+class Cat{
+	int age;//实例对象，每个对象有一份
+	static int numOfCats = 0;//静态变量，只有一份
+	public Cat (int age) {
+		this.age = age;
+		numOfCats++;
+	}
+}
+package JavaOopDay2.sub;
+
+public class Xoo {
+	public int a = 1;
+	protected int b =2;
+	int c = 3;
+	private int d = 8;
+	public int getD() {
+		return this.d;
+	}
+
+	}
+
+
+package JavaOopDay2;
+
+import JavaOopDay2.Sub;
+import JavaOopDay2.sub.Xoo;
+
+public class Demo06 {
+
+	public static void main(String[] args) {
+		Noo n =new Noo();
+		System.out.println(n.a);
+		System.out.println(n.b);
+		System.out.println(n.c++);
+		//System.out.println(n.d);//编译错误：有d但是不可见 ：封装
+		System.out.println(n.getD());
+		
+		Xoo xoo = new Xoo();
+		System.out.println(xoo.a);
+		//System.out.println(xoo.b);//编译错误 不在同一个包中
+		//System.out.println(xoo.c++);//编译错误 
+		//System.out.println(xoo.d);//编译错误
+		System.out.println(xoo.getD());
+		
+		Too t = new Too();
+		t.test();
+	}
+
+}
+class Too extends Xoo{
+	public void test() {
+		System.out.println(super.a);
+		System.out.println(super.b);//保护的 子类可见
+		//System.out.println(super.c);//不可见 ；默认的：包中可见
+		//System.out.println(super.d);
+	}
+}
+class Noo{
+	public int a = 1;//公用的
+	protected int b =2;//保护的
+	int c = 3;//默认的
+	private int d = 8;//私有的
+	public int getD() {
+		return this.d;
+	}
+}
+package JavaOopDay2;
+
+public class Demo05 {
+
+	public static void main(String[] args) {
+		Poo p = new Poo();
+		Super s = new Sub();
+		p.t(s);//重载方法调用有参数类型s由super决定，与对象Sub无关
+		System.out.println();
+	}
+
+}
+class Poo{
+	public void t(Super obj) {
+		System.out.println("Poo t(super)");
+		obj.s();
+	}
+	public void t(Sub obj) {
+		System.out.println("Poo t(sub)");
+		obj.s();
+	}
+}
+class Super {
+	public void s() {
+		System.out.println("Super s()");
+	}
+}
+class Sub extends Super{
+	public void s() {
+		System.out.println("Sub s()");
+	}
+}
+package JavaOopDay2;
+/*
+ * 属性绑定到变量的类型，有变量类型绝对访问那个属性
+方法动态绑定到对象，由对象的类型决定哪个方法。
+
+ */
+public class Demo04 {
+
+	public static void main(String[] args) {
+		Cheater c = new Cheater();
+		Person p = c;
+		System.out.println(p.name+c.name);
+		p.whoau();c.whoau();
+	}
+
+}
+class Person{
+	String name = "灰太狼";
+	public void whoau(){
+		System.out.println("灰太狼");
+	}
+}
+class Cheater extends Person{//cheater 骗子
+	String name = "美羊羊";
+	public void whoau() {
+		System.out.println("美羊羊");
+	}
+}
+
+
+Public 和 private
+Private修饰的成员变量和方法仅仅只能在本类中调用；而public修饰的成员变量和方法可以在任何地方调用。Publi修饰的内容是对外提供可以被调用的功能，需要相对稳定；private修饰的内容是对内实现的封装，如果公开 会增加维护的成本。
+
+Protected和默认访问控制
+·用protected修饰的成员变量和方法可以被子类及同一个包中的类使用。
+·默认访问控制即不书写任何访问控制符。
+默认访问控制的成员变量和方法可以被同一个包中的类调用。
+
+修饰符	本类	同一个包中的类	子类	其他类
+Public	可以	可以	可以	可以
+Protected	可以	可以	可以	不能
+默认	可以	可以	不能	不能
+private	可以	不能	不能	不能
+
+对于类的修饰可以使用public和默认方式。Public修饰的类可以被任何一个类使用；默认访问控制的类只可以被同一个包中的类使用。Protected 和private 可以用于修饰内部类。
+
+Static关键字
+--修饰成员变量的意义
+修饰方法
+·通常的方法都会涉及到对具体对象的操作。这些方法在调用时，需要隐式的传递对象的引用。
+·static修饰的方法则不需要针对某些对象进行操作，其运行结果仅仅与输入的参数有关。调用时直接用类名引用。
+·
+·静态变量
+1 静态变量在类加载期间初始化，存在方法区中
+2 是全体对象共享的一份变量
+3 经常使用类名访问静态变量。
+
+Final关键字—修饰类
+·final关键字修饰的类不可以被继承
+
+True false null 不是关键字！是字面量
+关键字：if else while for class public
+Final 修饰的变量
+Final的变量只能初始化（赋值一次），不能再修改
