@@ -1,0 +1,165 @@
+package JavaOopDay3;
+/*
+ * 抽象类（abstract class）
+抽象类，用于表示抽象概念，这里表示抽象的图形概念
+包含抽象方法的类一定抽象类
+抽象类可以定义变量，抽象类不能直接实例化，抽象只能被继承
+具体类在继承抽象类时候必须实现全部的抽象方法
+抽象类可以定义变量，不能实例化
+创建对象 == 实例化
+对象 == 实例
+目录 == 文件夹
+
+ */
+public class Demo04 {
+
+	public static void main(String[] args) {
+		shape s1;
+		s1 = new Circle(3,4,5);
+		//动态调用子类型的方法是，调用的是子类型实现的方法
+		//子类型实现了父类型的抽象方法，就是方法的重写。
+		System.out.println(s1.contains(1, 1));
+		System.out.println(s1.contains(10, 10));
+
+	}
+
+}
+
+package JavaOopDay3;
+
+public class Circle extends shape{
+	private int r;
+	public Circle() {}
+	public Circle(int x,int y,int r) {
+		x = this.x;//this.x继承于shape 类
+		y = this.y;
+		r = this.r;
+	}
+	public boolean contains(int x ,int y){
+		int a = x - this.x;
+		int b = y - this.y;
+		double c = Math.sqrt(a*a+b*b);
+		return c<=r;
+	}
+}
+
+package JavaOopDay3;
+/*
+ * 抽象类，用于表示抽象概念，这里表示抽象的图形概念
+包含抽象方法的类一定抽象类
+
+ */
+public abstract class shape {
+	protected int x;
+	protected int y;
+	public void up() {
+		y--;
+	}
+	/*抽象方法，没有方法体*/
+	public abstract boolean contains(int x, int y);
+}
+
+package JavaOopDay3;
+/*
+ * 数组类型数组（二维数组）
+数组的元素可以为任何类型，也包括数组类型
+二维数组
+1 JAVA 中没有真正的二维数组！java 二维数组是元素是数组的一维数组，元素是数组的数组
+
+ */
+public class Demo02 {
+
+	public static void main(String[] args) {
+		int[][] ary = new int[2][3];
+		ary[1] = new int[] {4,5,6,7};
+		
+		System.out.println(ary[1][2]);
+		System.out.println(ary.length);
+		System.out.println(ary[0].length);
+		System.out.println(ary[1].length);
+		
+		for(int i = 0;i<ary.length;i++) {
+			int[] temp = ary[i];//temp 是一个一维数组
+			for(int j = 0;j<temp.length;j++) {
+				int n = temp[j];
+				System.out.println(n+"");
+			}
+			System.out.println();
+		}
+	}
+
+}
+
+package JavaOopDay3;
+
+public class Point {
+	private int x;
+	private int y;
+	public Point() {
+	}
+	public Point(int x,int y) {
+		x = this.x;
+		y = this.y;
+	}
+	public int getX() {
+		return x;
+	}
+	public int getY() {
+		return y;
+	}
+	//toString 是 Object类定义，子类继承的方法
+	//在打印对象时候，默认调用，重写这个方法可以打印的更好看！
+
+	public String toString() {
+		return "("+x+","+y+")";
+	}
+}
+package JavaOopDay3;
+
+import java.util.Arrays;
+
+public class Demo01 {
+
+	public static void main(String[] args) {
+		Point[] ary;//声明了数组变量ary
+		ary = new Point[3];//创建了数组变量Point【3】
+		//new Point【3】 的实际情况是【null,null,null】
+		//数组元素自动初始化为null，并不创建元素对象
+		System.out.println(ary[1]);
+		ary[0] = new Point(1,2);
+		ary[1] = new Point(3,4);
+		ary[2] = new Point(5,6);
+		System.out.println(ary[1]);//调用了对象的tostring()
+		System.out.println(ary[1].toString());
+		System.out.println(Arrays.toString(ary));
+		ary = new Point[] {new Point(1,2),new Point(3,4)};
+		Point[] ary2 = {new Point(1,2),new Point(3,4)};
+		System.out.println(Arrays.toString(ary));
+		System.out.println(Arrays.toString(ary2));
+	}
+
+}
+
+对象数组
+所谓的对象数组，是对象的元素不是基本类型，而是引用类型
+元素是对象的引用的数组
+Point extends Object
+//Point.java
+..//toString 是 Object类定义，子类继承的方法
+//在打印对象时候，默认调用，重写这个方法可以打印的更好看！
+
+数组类型数组（二维数组）
+数组的元素可以为任何类型，也包括数组类型
+二维数组
+1 JAVA 中没有真正的二维数组！java 二维数组是元素是数组的一维数组，元素是数组的数组
+
+抽象类（abstract class）
+抽象类，用于表示抽象概念，这里表示抽象的图形概念
+包含抽象方法的类一定抽象类
+抽象类可以定义变量，抽象类不能直接实例化，抽象只能被继承
+具体类在继承抽象类时候必须实现全部的抽象方法
+抽象类可以定义变量，不能实例化
+创建对象 == 实例化
+对象 == 实例
+目录 == 文件夹
+
