@@ -1,0 +1,184 @@
+package JavaOopDay3;
+
+import java.util.TimerTask;
+import java.util.Timer;
+
+public class Demo10 {
+
+	public static void main(String[] args) {
+		final Timer timer = new Timer();
+		TimerTask task = new TimerTask(){
+			public void run() {
+				System.out.println("HI");
+			}
+		};
+		timer.schedule(task,0, 1000);
+		timer.schedule(new TimerTask() {
+			public void run() {
+				timer.cancel();
+			}
+		},1000*10);
+
+	}
+
+}
+
+package JavaOopDay3;
+/*
+ * 匿名内部类 == 匿名类
+New Uoo（）{}就在匿名内部类！是继承于Uoo类的子类，
+并且同时创建了子类型实例，其中{}是子类的类体
+{}是类体，可以写任何类中的成员
+
+ */
+public class Demo09 {
+
+	public static void main(String[] args) {
+		Uoo u = new Uoo();//创建Uoo实例
+		Uoo u1 = new Uoo(){};//创建匿名内部类实例
+		Uoo u2 = new Uoo(){
+			public void test() {
+				System.out.println("u2.test()");
+			}
+		};
+		u2.test();
+		Roo r = new Roo(){
+			public void test() {
+				System.out.println("实现test");
+			}
+		};// 创建匿名内部类实例
+		r.test();
+	}
+
+}
+interface Roo{
+	void test();
+}
+class Uoo{
+	public void test() {
+		
+	}
+}
+
+package JavaOopDay3;
+
+import java.util.Timer;
+import java.util.TimerTask;
+
+public class Demo08 {
+
+	public static void main(String[] args) {
+		Xoo xoo = new Xoo();
+		xoo.strat();
+	}
+
+}
+class Xoo{
+	Timer timer = new Timer();
+	public void strat() {
+		timer.schedule(new MyTask(),0,1000);
+		timer.schedule(new StopTask(),100*10);//在10s以后执行
+	}
+	 private class StopTask extends TimerTask{
+		 public void run() {
+			 timer.cancel();//取消timer的任务
+		 }
+	 }  
+	 private class MyTask extends TimerTask{
+		 int i = 10;
+		 public void run() {
+			 System.out.println(i--);
+		 }
+	 }
+}
+
+package JavaOopDay3;
+/*
+ * 接口
+Interface 差不多 abstract class
+接口中只能声明抽象方法和常量
+Runner 可以跑的人
+接口可以定义变量，接口不能实例化，即可只能被“实现”
+具体类实现一个接口，必须实现全部的抽象方法。
+具体可以同时实现多个接口，就是多继承现象
+Implements 实现，实际是继承关系
+SPEED从Runner继承的
+多重继承： Cat既是Hunter 又是Runner
+ */
+public class Demo07 {
+	Cat tom = new Cat();
+	Hunter hunter = tom;
+	Runner runner = tom;
+	//hunter.hunt();
+	//runner.hunt();编译错误， Runner上没有定义 hunt的方法
+	//new Runner（）； 编译错误，不能创建接口的实例
+	
+}
+class Cat implements Hunter,Runner{//实现多个接口
+	public void hunt() {//实现接口中的抽象方法
+		System.out.println("抓老鼠去！");
+	}
+	public void run() {
+		System.out.println("速度是"+SPEED);//SPEED是从Runner中继承的
+	}
+}
+interface Hunter extends Runner{//猎人是能跑的
+	void hunt();//打猎
+}
+interface Runner{
+	int SPEED = 100;
+	void run();
+}
+
+package JavaOopDay3;
+/*
+ * 定时器应用
+定时器可以进行定时执行一段代码（方法）
+Schedule 计划
+
+ */
+import java.util.Timer;
+import java.util.TimerTask;
+
+public class Demo06 {
+
+	public static void main(String[] args) {
+	Timer timer = new Timer();
+	//schedule
+	timer.schedule(new MyTask(),0, 1000/10);
+	}
+
+}
+class MyTask extends TimerTask{
+//	private char[] chs = {'-','\\','|','/'};
+	private String[] chs = {".+...","..+..","...+.","...."};
+	private int i = 0;
+	public void run() {
+		System.out.println(chs[i++%chs.length]);
+	}
+}
+
+package JavaOopDay3;
+
+public class Deno05 {
+
+	public static void main(String[] args) {
+	猫 汤姆 = new 猫("汤姆");
+	System.out.println(汤姆);
+	汤姆.你喜欢谁();
+	}
+	
+}
+
+class 猫{
+	String 名字;
+	public 猫(String 名字) {
+	this.名字 = 名字;
+	}
+	public void 你喜欢谁(){
+		System.out.println("我喜欢Jerry");
+	}
+	public String toString() {
+		return "我是"+名字;
+	}
+}
