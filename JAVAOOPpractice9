@@ -1,0 +1,117 @@
+业务需求描述
+·蛇会在舞台上定时自动运行
+·用键盘光标键控制蛇的运行
+·蛇不能反向运行，反向运行没有动作发生
+·蛇吃到食物蛇的长度会增加一节
+·食物被吃掉以后会随机生成新的食物
+·蛇碰到边界或吃到自己就结束，重新开始
+
+对象模型
+窗口-舞台-蛇/食物
+Jfranme 窗口
+WormStage 贪吃虫
+JPanel
+Cell 格子
+
+package com.wormstage;
+/*
+ * 一个单元格
+ */
+public class Cell {
+	private int x;
+	private int y;
+	public Cell() {	
+	}
+	
+	public Cell(int x,int y) {
+		this.x = x;
+		this.y = y;	
+	}
+	
+	public int getX() {
+		return x;
+	}
+	public void setX(int x) {
+		this.x = x;
+	}
+	public int getY() {
+		return y;
+	}
+	public void setY(int y) {
+		this.y = y;
+	}
+	
+	public String toString() {
+		return "["+x+""+y+"]";
+	}
+}
+
+package com.wormstage;
+
+import java.util.Arrays;
+
+/*
+ * 贪吃蛇
+ */
+public class Worm {
+	public static final int DEFAULT_LENGTH = 12;
+	private Cell[] cells;
+	public Worm() {
+		cells = new Cell[DEFAULT_LENGTH];
+		for(int i = 0;i<cells.length;i++) {
+			cells[i] = new Cell(i,0);
+		}
+	}
+	public String toString() {
+		return Arrays.toString(cells);
+	}
+}
+
+package com.wormstage;
+
+import javax.swing.JPanel;
+
+public class WormStage extends JPanel {
+	/**行数/
+	public static final int ROWS = 35;
+	/*列数*/
+	public static final int COLS = 35;
+	/**格子大小  10个像素*/
+	public static final int CELL_SIZE= 10;
+	private Worm worm;
+	private Cell food;
+	public static void main(String[] arys) {
+		//启动软件
+	}
+}
+
+package com.wormstage;
+
+import javax.swing.JPanel;
+
+public class WormStage extends JPanel {
+	/**行数/
+	public static final int ROWS = 35;
+	/*列数*/
+	public static final int COLS = 35;
+	/**格子大小  10个像素*/
+	public static final int CELL_SIZE= 10;
+	private Worm worm;
+	private Cell food;
+	public static void main(String[] arys) {
+		//启动软件
+	}
+}
+
+package com.wormstage.test;
+
+import com.wormstage.Worm;
+
+public class Test {
+	public static void main(String[] arys) {
+		Worm worm = new Worm();
+		System.out.println(worm);
+	}
+}
+
+
