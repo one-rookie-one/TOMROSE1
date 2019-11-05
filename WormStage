@@ -1,0 +1,384 @@
+package com.wormstage;
+/*
+ * 一个单元格
+ */
+public class Cell {
+	private int x;
+	private int y;
+	public Cell() {	
+	}
+	
+	public Cell(int x,int y) {
+		this.x = x;
+		this.y = y;	
+	}
+	
+	public int getX() {
+		return x;
+	}
+	public void setX(int x) {
+		this.x = x;
+	}
+	public int getY() {
+		return y;
+	}
+	public void setY(int y) {
+		this.y = y;
+	}
+	
+	public String toString() {
+		return "["+x+""+y+"]";
+	}
+}
+
+package com.wormstage;
+
+import java.util.Arrays;
+
+/*
+ * 贪吃蛇
+ */
+public class Worm {
+	public static final int DEFAULT_LENGTH = 12;
+	private Cell[] cells;
+	public static final int UP = 1;
+	public static final int DOWN =-1;
+	public static final int LEFT = 2;
+	public static final int RIGHT = -2;
+	private int currentDirection;//蛇当前运动方向
+	public Worm() {
+		cells = new Cell[DEFAULT_LENGTH];
+		for(int i = 0;i<cells.length;i++) {
+			cells[i] = new Cell(i,0);
+			currentDirection = DOWN;
+			
+		}
+	}
+	public boolean contains(int x,int y) {
+		for(int i = 0;i<cells.length;i++) {
+			Cell node = cells[i];
+			if(node.getX()==x && node.getY()==y) {
+			return true;	
+			}
+		}
+			return false;
+	}
+	/*
+	 *
+1)	计算currentDirection与direction的和，如果是0 表示反向了，就结束方法返回，不进行任何动作
+2)	CurrentDirection = direction 改变当前的方向，作为下次运行的方向
+3)	判断当前节点的坐标与食物对象的坐标一致，如果一致说明是吃到食物了
+4)	如果吃到食物，就将cells数组进行扩容，将cells数组内容的每个元素向后移动
+5)	将新头节点插入的头位置cells【0】 = newHead
+6)	返回是否吃到食物
+
+	 */
+	public boolean creep(int direction,Cell food) {
+		if(currentDirection + direction ==0) {
+			return false;//反向了，不进行任何行动
+		}
+		currentDirection = direction;
+		Cell head = createHead(direction);
+		boolean eat = false;
+		if(head.getX()==food.getX()&&head.getY()==food.getY()) {
+			eat = true;
+		}
+		if(eat) {
+			cells = Arrays.copyOf(cells, cells.length+1);
+		}
+		for(int i =cells.length-1;i>=1;i--) {
+			cells[i] = cells[i-1];
+		}
+		cells[0] = head;
+		return eat;
+	}
+	public boolean hit() {
+		return hit(currentDirection);
+	}
+	
+	public boolean creep(Cell food) {
+		return creep(currentDirection,food);
+	}
+	
+	public boolean hit(int direction) {
+		//system.out.println("方向(2):"+direction);
+		Cell head = createHead(direction);
+		if(head.getX()<0 || head.getX()>=WormStage.COLS || 
+				head.getY()<0 ||head.getY()>=WormStage.ROWS) {
+			return true;
+		}
+		for(int i = 0;i<cells.length-1;i++) {
+			Cell node = cells[i];
+			if(node.getX()==head.getX()&&
+					node.getY()==head.getY()) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public void creep() {
+		for(int i = cells.length-1;i>=1;i--) {
+			cells[i] = cells[i-1];
+		}
+		cells[0] = createHead(currentDirection);
+	}
+	private Cell createHead(int direction) {
+		int x = cells[0].getX();
+		int y = cells[0].getY();
+		switch(direction) {
+		case DOWN: y++;break;
+		case UP:   y--;break;
+		case LEFT: x--;break;
+		case RIGHT: x++;break;
+	 }
+	return new Cell(x,y);
+}
+	public Cell[] getCells() {
+		return cells;
+	}
+	
+	public String toString() {
+		return Arrays.toString(cells);
+	}
+}
+
+	public WormStage() {
+		worm = new Worm();
+		food = createFood();
+	}/*
+	生成一个食物
+	1.生成随机数x，y
+	2.检查蛇是否包含x，y
+	2.1如果包含 返回1
+	3 创建食物节点。
+	
+		**/
+	
+	private Cell createFood(){
+		int x;
+		int y;
+		Random r = new Random();
+		do {
+		x = r.nextInt(COLS);
+		y = r.nextInt(ROWS);
+		}while(worm.contains(x,y));
+		return new Cell(x,y);
+	}
+	public String toString() {
+		return "worm:"+worm+"\nfood:"+food;
+	}
+		public void paint(Graphics g) {//填充背景
+			g.setColor(Color.DARK_GRAY);
+			g.fillRect(0, 0, getWidth(), getHeight());
+			g.setColor(Color.red);
+			g.fill3DRect(CELL_SIZE*food.getX(), CELL_SIZE*food.getY(), CELL_SIZE, CELL_SIZE, true);
+			//画蛇
+			g.setColor(Color.green);
+			Cell[] cells = worm.getCells();
+			for(int i = 0; i<cells.length;i++) {
+				Cell node = cells[i];
+				g.fill3DRect(CELL_SIZE*node.getX(), CELL_SIZE*node.getY(), CELL_SIZE, CELL_SIZE, true);
+			}
+			}
+		
+	public static void main(String[] args) {
+		//启动软件 WormStage.java
+		JFrame frame = new JFrame("贪吃蛇");
+		WormStage pane = new WormStage();
+		frame.setLayout(null);//取消窗口的默认布局，取消自动充满
+		frame.add(pane);//窗口里添加面板
+		pane.setSize(CELL_SIZE*COLS,CELL_SIZE*ROWS);//面板大小
+		pane.setLocation(50,50);//面板位置
+		frame.setSize(460,480);
+		pane.setBorder(new LineBorder(Color.black));
+		frame.setLocationRelativeTo(null);//居中
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		pane.action();
+	}
+	private void action() {
+		//worm.creep(food);
+		//repaint();
+		Timer timer = new Timer();
+		timer.schedule(new TimerTask() {
+			public void run() {
+				if(worm.hit()) {
+					worm = new Worm();
+					food = createFood();
+				}else {
+					boolean eat = worm.creep(food);
+					if(eat) {
+						food = createFood();
+						}
+				}
+				repaint();
+				}
+			
+		},0,1000/7);
+		this.requestFocus();
+		this.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent e) {
+				int key = e.getKeyCode();
+				switch(key) {
+				case KeyEvent.VK_UP://上箭头按下
+				creepTo(Worm.UP);
+				break;
+				case KeyEvent.VK_DOWN://下箭头按下
+				creepTo(Worm.DOWN);
+				break;
+				case KeyEvent.VK_LEFT://左箭头按下
+				creepTo(Worm.LEFT);
+				break;
+				case KeyEvent.VK_RIGHT://右箭头按下
+				creepTo(Worm.RIGHT);
+				break;
+				
+				}
+			}
+		});
+	}
+	private void creepTo(int direction) {
+		if(worm.hit(direction)) {
+			worm = new Worm();
+			food = createFood();
+		}else {
+			boolean eat = worm.creep(direction,food);
+			if(eat) {
+				food = createFood();
+				
+			}
+		}
+		repaint();
+	}
+
+
+
+	}
+
+
+package com.wormstage.test;
+
+import com.wormstage.Worm;
+/*
+ * 测试默认的贪吃蛇对象
+ */
+public class Test {
+	public static void main(String[] arys) {
+		Worm worm = new Worm();
+		System.out.println(worm);
+	}
+}
+
+package com.wormstage.test;
+
+import org.junit.Test;
+import com.wormstage.WormStage;
+import com.wormstage.Worm;
+import com.wormstage.Cell;
+/*
+ * test 测试
+ * case 案例
+ */
+public class Testcase {
+	@Test//来自Junit的注释方法，用于执行测试方法
+	public void testWormInit() {
+		System.out.println("测试Worm构造器");
+		Worm worm = new Worm();
+		System.out.println(worm);	
+	}
+@Test
+	public void testWormCointains() {
+		System.out.println("测试worm,包含算法");
+		Worm worm = new Worm();
+		System.out.println(worm.contains(2, 0));//true
+		System.out.println(worm.contains(5, 6));//false
+	}
+@Test
+	public void testWormStage() {
+	System.out.println("创建舞台实例");
+	WormStage stage = new WormStage();
+	System.out.println(stage);
+}
+@Test
+	public void testCreep() {
+	System.out.println("爬行测试");
+	Worm worm = new Worm();
+	System.out.println(worm);
+	worm.creep();
+	System.out.println(worm);
+}
+@Test
+	public void testCreepForFood() {
+	System.out.println("检查食物的爬行");
+	Worm worm = new Worm();
+	Cell food = new Cell(2,1);
+	System.out.println(worm);
+	System.out.println(worm.creep(Worm.DOWN,food));
+	System.out.println(worm);
+	System.out.println(worm.creep(Worm.DOWN,food));
+	System.out.println(worm);
+	System.out.println(worm.creep(Worm.RIGHT,food));
+	System.out.println(worm);
+	
+}
+}
+
+package com.wormstage.test;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import javax.swing.JFrame;//frame 相框
+import javax.swing.JPanel;//panel 面板
+import javax.swing.border.LineBorder;
+
+/*
+ * 显示窗口与绘图
+ */
+
+public class JFrameDemo {
+
+	public static void main(String[] args) {
+		//启动软件 WormStage.java
+		JFrame frame = new JFrame("窗口");
+		Stage pane = new Stage();
+		frame.setLayout(null);//取消窗口的默认布局，取消自动充满
+		frame.add(pane);//窗口里添加面板
+		pane.setSize(10*35,10*35);//面板大小
+		pane.setLocation(50,50);//面板位置
+		frame.setSize(460,480);
+		pane.setBorder(new LineBorder(Color.black));
+		frame.setLocationRelativeTo(null);//居中
+		frame.setVisible(true);
+		//在swing中如下代码可以实现对键盘事件的监听（）
+		//也就是获得到底哪一个键盘按键被按下了
+		pane.requestFocus();//使pane获取输入焦点
+		//也就是使pane变成键盘输入的目标
+		//在pan上添加键盘事件的监听，获得到底哪个按键被按下
+		pane.addKeyListener(new KeyListener(){
+			//在按键按下的时候的方法
+			public void keyPressed(KeyEvent e) {
+			System.out.println("HI"+e.getKeyCode());
+			}
+			
+			//在按键释放的时候执行的方法
+			public void keyReleased(KeyEvent e) {	
+			}
+			//
+			public void keyTyped(KeyEvent e) {
+			}});
+	}
+
+}
+class Stage extends JPanel{
+	/*重写了默认的绘图方法*/
+	public void paint(Graphics g) {
+		g.setColor(Color.DARK_GRAY);
+		g.fillRect(0, 0, this.getWidth(), getHeight());
+		g.setColor(Color.red);
+		g.fill3DRect(50, 50, 30, 20, true);
+	}
+}
+
