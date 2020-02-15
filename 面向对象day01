@@ -1,0 +1,144 @@
+package com.company.day01;
+
+public class MyObject {
+
+    public static void main(String[] args){
+        MyObject obj = new MyObject();
+        /**
+         * 为什么我有toString（）方法
+         * 因为所有的类都继承Object，而toString()方法是Object定义的。
+         * 我们直接继承了这个方法
+         *
+         * Object toString()这个方法帮我们返回了一个字符串
+         * 这个字符串的格式是固定的：类名@hashcode
+         * hashcode的意思是一串数字或者代表地址在JAVA中叫句柄
+         */
+        String info = obj.toString();
+        //System.out.println(info);
+        /**
+         * System.out.println(obj)方法实际上是输出给定对象的
+         * toString()方法的返回值。
+         */
+        System.out.println(obj);
+    }
+
+    @Override
+    public String toString() {
+        return "这是我们自己定义的toString()方法的返回值。MyObject!";
+    }
+}
+
+package com.company.day01;
+
+public class Point {
+
+    private int x;
+    private int y;
+
+    public Point(int x,int y){
+        this.x = x;
+        this.y = y;
+    }
+    public String toString(){
+        /**
+         * 重写toString的方法，返回的字符串用于描述当前对象
+         * 这个对象保存的是一个点的信息，所以告知外界x,y的坐标
+         */
+        return "x="+x+",y="+y;
+    }
+    @Override
+    /**
+     * 重写equals方法
+     * 重写Object继承过来的方法，用于定义对象内容比较规则
+     */
+    public boolean equals(Object obj){
+        /**
+         * 若给定的对象obj和当前的对象地址一样，那么他们是同一个对象，equals肯定返回true！
+         * 自己一定像自己
+         * 当我们在equals中有大量的逻辑比较时，加入这个判断，会节省性能开销
+         */
+        if (this == obj){
+            return true;
+        }
+        /**
+         * equals比较前要进行安全验证，确保给定的对象不是null
+         * obj若是null，说明该引用变量没有指向任何对象
+         * 那么就不能引用obj所指向对象的属性和方法
+         * 若这么做就会引发NULLPointerException,空指针异常。
+         */
+        if (obj==null){
+            return false;
+        }
+        /**
+         * 直接将Object转为子类是有风险的
+         * 我们不能确定Object和我们要比较的对象是一个类型的
+         * 这会引发ClassCastException!我们称为【类造型异常】
+         */
+        //重写equals方法是第一件要做的事情就是判断给定对象和当前对象是否为同一类型，
+        // 如果不是返回false，没有可比性
+        if (!(obj instanceof Point)){
+            return false;
+        }
+        Point p = (Point)obj;
+        /**
+         * 内容比对逻辑
+         */
+        return this.x==p.x&&this.y==p.y;
+    }
+    public static void main(String[] args){
+        /**
+         * 不能直接使用toString()方法，因为该方法不是静态的
+         * java语法规定：
+         * 静态方法中不能直接引用非静态的属性和方法
+         * 非静态方法可以直接引用静态方法和属性
+         */
+     //   System.out.println(toString());编译错误
+        Point w = new Point(1,2);
+        System.out.println(w);//输出w对象的toString()返回值；
+    }
+}
+
+package com.company.day01;
+
+public class TestSpring {
+    public static void main(String[] args){
+        /**
+         * 字符串的地址是不可改变的
+         * 对字符串的任意操作，都会重新创建对象，
+         * 而不是影响以前的对象
+         */
+        String s1 = "Hello";
+        String s2 = new String (Hello);
+        System.out.println(s1.equals(s2));
+        System.out.println(s1);
+        //问：s1的地址发生改变了吗？
+    }
+}
+
+package com.company.day01;
+
+public class TestEquals<p2> {
+  public static void main(String[] args){
+          Point p1 = new Point(1,2);
+          Point p2 = null;
+      /**
+       * ==比较的是双方的值是否相等
+       * p1,p2是两个引用类型的变量，而引用类型保存的是对象的句柄（也就是hashcode值）
+       * 除了基本类型（int double）等，其他的都是引用类型
+       *
+       * ==在对象比较中，比较的是两个对象是否为一个对象
+       * 而equals比较的是两个对象的值是否相等
+       * 内容相等取决于业务逻辑的需要，可以自行定义比较规则
+       */
+      MyObject p3 = new MyObject();
+      if (p1.equals(p2)){
+              System.out.println("两个点相等");
+          }else{
+              System.out.println("两个点不相等");
+              System.out.println("点1："+p1);
+              System.out.println("点2："+p2);
+          }
+    }
+}
+
+
