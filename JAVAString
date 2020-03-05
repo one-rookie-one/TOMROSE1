@@ -1,0 +1,508 @@
+package com.company.day01;
+
+public class MyObject {
+
+    public static void main(String[] args){
+        MyObject obj = new MyObject();
+        /**
+         * 为什么我有toString（）方法
+         * 因为所有的类都继承Object，而toString()方法是Object定义的。
+         * 我们直接继承了这个方法
+         *
+         * Object toString()这个方法帮我们返回了一个字符串
+         * 这个字符串的格式是固定的：类名@hashcode
+         * hashcode的意思是一串数字或者代表地址在JAVA中叫句柄
+         */
+        String info = obj.toString();
+        //System.out.println(info);
+        /**
+         * System.out.println(obj)方法实际上是输出给定对象的
+         * toString()方法的返回值。
+         */
+        System.out.println(obj);
+    }
+
+    @Override
+    public String toString() {
+        return "这是我们自己定义的toString()方法的返回值。MyObject!";
+    }
+}
+
+package com.company.day01;
+
+public class Point {
+
+    private int x;
+    private int y;
+
+    public Point(int x,int y){
+        this.x = x;
+        this.y = y;
+    }
+    public String toString(){
+        /**
+         * 重写toString的方法，返回的字符串用于描述当前对象
+         * 这个对象保存的是一个点的信息，所以告知外界x,y的坐标
+         */
+        return "x="+x+",y="+y;
+    }
+    @Override
+    /**
+     * 重写equals方法
+     * 重写Object继承过来的方法，用于定义对象内容比较规则
+     */
+    public boolean equals(Object obj){
+        /**
+         * 若给定的对象obj和当前的对象地址一样，那么他们是同一个对象，equals肯定返回true！
+         * 自己一定像自己
+         * 当我们在equals中有大量的逻辑比较时，加入这个判断，会节省性能开销
+         */
+        if (this == obj){
+            return true;
+        }
+        /**
+         * equals比较前要进行安全验证，确保给定的对象不是null
+         * obj若是null，说明该引用变量没有指向任何对象
+         * 那么就不能引用obj所指向对象的属性和方法
+         * 若这么做就会引发NULLPointerException,空指针异常。
+         */
+        if (obj==null){
+            return false;
+        }
+        /**
+         * 直接将Object转为子类是有风险的
+         * 我们不能确定Object和我们要比较的对象是一个类型的
+         * 这会引发ClassCastException!我们称为【类造型异常】
+         */
+        //重写equals方法是第一件要做的事情就是判断给定对象和当前对象是否为同一类型，
+        // 如果不是返回false，没有可比性
+        if (!(obj instanceof Point)){
+            return false;
+        }
+        Point p = (Point)obj;
+        /**
+         * 内容比对逻辑
+         */
+        return this.x==p.x&&this.y==p.y;
+    }
+    public static void main(String[] args){
+        /**
+         * 不能直接使用toString()方法，因为该方法不是静态的
+         * java语法规定：
+         * 静态方法中不能直接引用非静态的属性和方法
+         * 非静态方法可以直接引用静态方法和属性
+         */
+     //   System.out.println(toString());编译错误
+        Point w = new Point(1,2);
+        System.out.println(w);//输出w对象的toString()返回值；
+    }
+}
+
+package com.company.day01;
+
+public class TestEquals<p2> {
+  public static void main(String[] args){
+          Point p1 = new Point(1,2);
+          Point p2 = null;
+      /**
+       * ==比较的是双方的值是否相等
+       * p1,p2是两个引用类型的变量，而引用类型保存的是对象的句柄（也就是hashcode值）
+       * 除了基本类型（int double）等，其他的都是引用类型
+       *
+       * ==在对象比较中，比较的是两个对象是否为一个对象
+       * 而equals比较的是两个对象的值是否相等
+       * 内容相等取决于业务逻辑的需要，可以自行定义比较规则
+       */
+      MyObject p3 = new MyObject();
+      if (p1.equals(p2)){
+              System.out.println("两个点相等");
+          }else{
+              System.out.println("两个点不相等");
+              System.out.println("点1："+p1);
+              System.out.println("点2："+p2);
+          }
+    }
+}
+
+package com.company.day01;
+
+public class TestString {
+    public static void main(String[] args){
+        /**
+         * 字符串的对象是不可变的！
+         * 对字符串的任意操作，都会重新创建对象
+         * 而不是影响对象
+         */
+        String s1 = "Hello";
+        String s2 = new String("Hello");
+
+      //  System.out.println(s1 == s2);
+        /**
+         * 在比较字符串的时候我们通常的做法是使用equals方法
+         * 字符串重写了Object的equals方法。用于比较字符串内容是否一致
+         */
+        System.out.println(s1.equals(s2));
+        /**
+         * 原因在于不能保证变量不是null，如果变量是null，我们在调用equals方法时会发生空指针异常,导致程序退出
+         * 当我们将一个字符串和一个字面量进行等值比较时我们不要调用变量的equals方法，应该调用字面量的equals方法
+         */
+        //if(s1.equals("Hello")){
+            //System.out.println("这个字符串就是Hello");
+        //}
+        if("Hello".equals(s1)){//不会引发空指针异常，编程习惯
+            System.out.println("这个字符串就是Hello");
+        }else{
+            System.out.println("这两个字符串不相等");
+        }
+        System.out.println(s1);
+        //问：s1的地址发生改变了么？
+        /**
+         * String自己实现的一个比较方法
+         * 该方法可以忽略字符串的大小写问题
+         */
+        String s3 = "Hello";
+        if (s3.equalsIgnoreCase("Hello")){
+            System.out.println("两个字符串内容是hello");
+        }else{
+            System.out.println("两个字符串不相等");
+        }
+        String s4 = "    abs   ";
+        String trimS4 = s4.trim();//去掉s4字符串两边的空白
+        String s5 = "HelloWorld";
+
+        // 将s5的英文转化为小写
+        String lowerS5 = s5.toLowerCase();
+
+        //将s5的英文部分转化为大写
+        String upperS5 = s5.toUpperCase();
+
+        System.out.println("["+s4+"]");//[  abs   ]
+        System.out.println("["+trimS4+"]");//[abs]
+
+        System.out.println(lowerS5);//helloworld
+        System.out.println(upperS5);//HELLOWORLD
+        //判断s5这个字符串是否以给定的“Hello”开始
+        if(s5.startsWith("Hello")){
+            System.out.println(s5+"是以Hello开始的");
+        }
+        /**
+         *思考
+         * 如何让HelloWorld这个字符串以hello开头成立
+         * 思路：
+         * 将HelloWorld转化为纯小写的helloworld在和hello比较就可以
+         * 步骤：
+         * 1：调用字符串Helloworld的toLowerCase方法，将字符串转化
+         * 2：在调用转化好的字符串startsWith方法和hello进行比较
+         */
+        //1
+        //String lower = s5.toLowerCase();//lower = "helloworld"
+        //2
+        //if (lowerS5.startsWith("hello")){
+          //  System.out.println(s5+"是以hello开始的");
+        //}
+        if(s5.toLowerCase().startsWith("hello")){
+            System.out.println(s5+"是以hello开始的");
+        }//length()方法返回当前字符串的字符数
+            System.out.println(s5+"有"+s5.length()+"个字符");
+
+    }
+}
+
+package com.company.day01;
+
+public class TestString2 {
+    public static void main(String[] args){
+        String str = "Think in Java";//java编程思想
+        /**
+         * 查看“Java”在字符串str中的位置
+         * 注意，若str中不包含“Java”那么返回的整数位为-1
+         */
+        int index = str.indexOf("Java");
+        System.out.println("Java出现的位置"+index);
+        /**
+         * indexOf会查找【第一次】出现的位置
+         */
+        index = str.indexOf("i");
+        System.out.println("i出现的位置"+index);
+
+        /**
+         *indexOf的重载方法indexOf（String str,int from）
+         * 该方法会返回从from位置开始后第一次出现str的位置
+         */
+        index = str.indexOf("i",4);
+        /**
+         * 查找in字符后第一次出现i的位置
+         * 通常这样的需求会使用indexOf的这个重载方法
+         * Think in Java
+         * 步骤：
+         * 1：先找到第一次出现in的位置
+         * 2：在根据这个位置开始查找后续的i
+         */
+        //1
+        index = str.indexOf("in");
+        //2这里对from参数加in的长度的目的是从in之后的位置开始查找
+        index = str.indexOf("i",index+"in".length());
+        System.out.println("in之后i出现的位置："+index);
+
+        /**
+         *和indexOf类似，lastIndexOf时查找最后一次出现的位置
+         */
+        index = str.lastIndexOf("in");
+        System.out.println("in最后出现的位置："+index);
+        /**
+         * LastIndexOf的重载方法LastIndexOf（String str,int from）
+         * 从from开始查找最后一次出现给定字符的位置
+         * 这个from有截取的效果，会进行反向查找
+         */
+        index = str.lastIndexOf("in",7);
+        System.out.println("从第8个字符开始查找最后一次出现的in的位置："+index);
+
+        /**
+         * 获取指定位置的单个字符
+         * 0123456789...index
+         * Think in Java str
+         */
+        char ch = str.charAt(6);
+        System.out.println(ch);
+        /**
+         * 使用charAt判断字符串是否是回文
+         */
+        String str2 = "上海自来水来自海上";
+        /**
+         * 回文：从左往右念和从右往左念是一样的
+         * 思路:
+         *      字符串中第1位置的字符和最后一个字符一致
+         *      第二个字符和倒数第二个字符一致
+         *      以此类推，若全部一致则为回文
+         * 步骤：
+         *      1.进行循环比较，循环次数是有字符串长度除以2决定的
+         *      2.比较整数位置的字符和对应的倒数位置的字符是否相等
+         */
+        boolean tf = true;//定义一个变量，表示是否为回文，默认为是
+        //1
+        for (int i = 0;i<str2.length()/2;i++){
+            //2
+            char first = str2.charAt(i);
+            char last = str2.charAt(str2.length()-1-i);
+            if (first != last ){
+                tf = false;//若整数位置和倒数位置不同，就不是回文
+                break;//已经不是回文了，就没有必要继续检查了
+            }
+        }
+        if (tf){
+            System.out.println("是回文");
+        }else{
+            System.out.println("不是回文");
+        }
+
+
+    }
+}
+
+package com.company.day01;
+
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
+
+public class TestString3 {
+    public static void main(String[] args) throws UnsupportedEncodingException {
+        /**
+         * String的方法测试
+         */
+        /**
+         * subString(int start,int end)
+         * 作用：截取字符串
+         * 从start位置开始截取，截取到end位置结束
+         * 温馨提示：
+         * java中很多方法在描述范围的时候都是“包前不包后”
+         *
+         */
+        String str = "HelloWorld";
+        String sub = str.substring(5,str.length());
+        System.out.println(sub);
+        /**
+         * subString的重载方法是subString(int start)
+         * 从start开始截取到末尾
+         */
+        String sub2 = str.substring(5);
+        System.out.println(sub2);
+        /**
+         * 将字符串转换为相应的字节
+         * getBytes()
+         * 将字符串转换为字节数组并返回
+         */
+        String info = "我爱java";
+        /**
+         * 以当前系统默认的字符串编码集转换为字节
+         * windows的默认编码集：GBK
+         * GBK：英文用1个字节描述，汉字用两个字节描述
+         */
+        byte[] array = info.getBytes();
+        System.out.println(Arrays.toString(array));
+
+        /**
+         * getBytes()的重载方法，用于将字符串以指定的编码集转换字节数组
+         * getBytes(String charsetName)
+         */
+        /**
+         * 这个重载方法需要捕获异常，这里可能引发没有这个编码集的异常
+         *
+         * iso8859-1 欧洲常用的编码集
+         * gbk 国标
+         * gb2312 国标
+         * utf-8 最常用的
+         */
+        /**
+         * 编码：将数据已特定格式转换为字节
+         * 解码：将字节以特定格式转换为数据
+         */
+        byte[] utf = info.getBytes("UTF-8");
+        System.out.println(Arrays.toString(utf));
+
+        String infoGBK = new String(utf,"UTF-8");
+        System.out.println(infoGBK);
+
+
+    }
+
+    }
+    package com.company.day01;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+/**
+ * 测试正则表达式
+ * @author  Administrator
+ *
+ */
+
+public class TestRegex {
+    public static void main(String[] args){
+        /**
+         * Pattern的作用是描述正则表达式的格式支持
+         * 使用静态方法compile注册正则表达式生成实例
+         */
+        /**
+         * 使用java的字符串去描述正则表达式的时候，会出现一个冲突
+         * 如何描述正则表达式的“.”
+         * 起因：
+         *      在正则表达式中我们想描述一个“.”,但"."在正则表达式中有特殊含义，它代表任意字符，
+         *      所以我们在正则表达式中想描述“.”的原意就要写成“\.”。
+         *      但是我们用java的字符串去描述正则表达式的时候，因为“.”在java字符串中没有特殊的含义，
+         *      所以java认为我们书写String s = "\.";是有语法错误的，因为“.”不需要转义。这就产生了冲突。
+         * 目的：
+         *      我们实际的目的很简单，就是要让java的字符串描述“\.”
+         *      所以，那么在java中“\”是有特殊含义的，代表转义字符
+         *      我们只需要将“\”转义为单纯的斜杠即可描述“\.”了
+         *      所以我们用java描述“\.”的正确写法是String s = "\\.";
+         *
+         */
+        //定义正则表达式
+        String regStr = "^[a-zA-Z0-9_]+@[a-zA-Z0-9]+(\\.com|\\.cn|\\.net)$";
+        //手机号码的正则表达式
+        String regPhoneNumber = "(\\+86)?\\d{11}$";
+        String regIDNumber = "^\\d{18}|\\x?";
+        System.out.println(regStr);
+        //注册正则表达式
+        Pattern pattern = Pattern.compile("regStr");
+
+        String mailStr = "woaijava@qq.com";
+
+        //匹配字符串，返回描述匹配结果的Matcher实例;
+        Matcher matcher = pattern.matcher(mailStr);
+        //通过调用Matcher的find方法得知是否匹配成功
+        if(matcher.find()){
+            System.out.println("邮箱格式正确");
+        }else{
+            System.out.println("邮箱格式不正确");
+        }
+
+
+
+    }
+}
+
+package com.company.day01;
+
+import java.util.Arrays;
+
+/**
+ *测试字符串的拆分
+ * @author Administrator
+ */
+public class TestStringSpilt {
+    public static void main(String[] args){
+        String info = "hello!world!java";
+        String[] array = info.split("!");
+        System.out.println(Arrays.toString(array));
+        /**
+         * 对图片名重新定义，要保留图片原来的后缀
+         */
+        String name = "me.jpg";
+        String[] nameArray = name.split("\\.");
+        System.out.println("数组的长度："+nameArray.length);
+        String newName = "123123213213."+nameArray[1];
+        System.out.println("新的图片名："+newName);
+
+    }
+}
+
+package com.company.day01;
+
+/**
+ * 测试字符串替换过程
+ * @author Moonnight
+ */
+public class TestReplace {
+    public static void main(String[] args){
+        //定义一个字符串，数字和字母穿插
+        String info = "123ABC67890DEF123GHI";
+        /**
+         * 目标：
+         *      将字符中的数字替换为“#NUMBER#”
+         *
+         *      replaceAll方法，可以替换字符串中满足正则表达式部分的内容
+         *
+         *      replaceAll(String regex,String replacement);
+         */
+        String str = info.replaceAll("[0-9]+","#NUMBER#");
+        System.out.println(str);
+    }
+}
+
+package com.company.day01;
+
+/**
+ * StringBuilder 该类用于对字符串频繁的编辑操作
+ * 使用StringBuilder 可以在大规模修改字符时不开辟新的字符串对象
+ * 从而节约内存资源
+ * 所以，对以有大量字符串操作中，不应该使用String应该使用StringBuilder
+ *
+ * @author Moonnight
+ */
+public class TestStringBuilder {
+    public static void main (String[] args){
+      //  String info = "java";
+        //for (int i = 0;i<100000000;i++){
+          //  info+= "java";
+            //System.out.println(info);
+        StringBuilder builder = new StringBuilder("java");
+        for (int i = 0;i<100000000;i++){
+            /**
+             * append在当前字符串末尾拼接给定的字符串
+             * 等同于字符串的+=操作，同上info+="java";
+             *
+             */
+            builder.append("java");
+        }
+        String info = builder.toString();
+        System.out.println(info);
+
+        }
+
+    }
+
+
+
+
